@@ -1,0 +1,267 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{dirtree}
+\usepackage{float}
+\usepackage{caption}
+
+% Page Geometry
+\geometry{margin=1in}
+
+% Colors for code snippets
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Code listing style
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{GreenBin Project Report}
+\lhead{Data Structures & Algorithms}
+\rfoot{Page \thepage}
+
+\begin{document}
+
+% -------------------------------------------------------------------
+% TITLE PAGE
+% -------------------------------------------------------------------
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        
+        \Huge
+        \textbf{GreenBin: Smart Waste Management System}
+        
+        \vspace{0.5cm}
+        \LARGE
+        Comprehensive Technical Report
+        
+        \vspace{1.5cm}
+        
+        \textbf{University of Dubai}\\
+        \textbf{College of Engineering \& IT}
+        
+        \vfill
+        
+        \Large
+        \textbf{Prepared by:}\\
+        [Your Name/Group Members]
+        
+        \vspace{0.8cm}
+        
+        \textbf{Date:}\\
+        \today
+        
+    \end{center}
+\end{titlepage}
+
+% -------------------------------------------------------------------
+% ABSTRACT
+% -------------------------------------------------------------------
+\begin{abstract}
+GreenBin is an advanced, data-driven waste management dashboard designed to optimize urban logistics through the application of fundamental computer science data structures and algorithms. The system simulates a network of smart bins and processing facilities, enabling real-time monitoring, efficient vehicle dispatch, and data-driven decision-making. This report details the system's architecture, the rationale behind the technology stack, and a deep dive into the implementation of Graphs, AVL Trees, Priority Queues, and Sorting algorithms to solve specific operational challenges.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+% -------------------------------------------------------------------
+% SECTION 1: INTRODUCTION
+% -------------------------------------------------------------------
+\section{Introduction}
+Efficient waste management is a critical challenge for modern smart cities. Traditional schedule-based collection methods often lead to inefficiencies, such as collecting empty bins or allowing full bins to overflow. GreenBin addresses these issues by providing a centralized dashboard that leverages real-time data to optimize collection routes and schedules.
+
+The project serves as a practical application of Data Structures and Algorithms (DSA), demonstrating how abstract concepts like Graph Theory and Heaps can be applied to tangible problems like route optimization and task prioritization.
+
+% -------------------------------------------------------------------
+% SECTION 2: SYSTEM ARCHITECTURE
+% -------------------------------------------------------------------
+\section{System Architecture}
+
+\subsection{Folder Structure}
+The project follows a modular \textbf{Model-View-Controller (MVC)} inspired architecture. This separation of concerns ensures that the data logic, user interface, and control flow remain distinct, facilitating easier maintenance and scalability.
+
+\begin{itemize}
+    \item \textbf{app.py}: The core controller. It initializes the application, manages global state (bins, requests, history), and handles routing between views.
+    \item \textbf{views/}: Contains the presentation logic. Each module corresponds to a specific page:
+        \begin{itemize}
+            \item \texttt{dashboard.py}: Main overview with charts.
+            \item \texttt{bins.py}: Registry management.
+            \item \texttt{dispatch.py}: Map and routing interface.
+            \item \texttt{facilities.py}: Performance reports.
+        \end{itemize}
+    \item \textbf{models/}: Defines the data schema for \texttt{Bin}, \texttt{Facility}, and \texttt{CollectionRequest} objects.
+    \item \textbf{structures/}: Custom implementations of core data structures:
+        \begin{itemize}
+            \item \texttt{avl\_tree.py}: For facility indexing.
+            \item \texttt{graph.py}: For road network modeling.
+            \item \texttt{priority\_queue.py}: For urgent dispatch.
+            \item \texttt{stack.py} \& \texttt{queue.py}: For history and requests.
+        \end{itemize}
+    \item \textbf{algorithms/}: Implementation of \texttt{merge\_sort}, \texttt{dijkstra}, and search logic.
+    \item \textbf{data/}: JSON files for persistent storage.
+\end{itemize}
+
+\subsection{Technology Stack}
+\begin{itemize}
+    \item \textbf{Language}: Python 3.x
+    \item \textbf{Frontend Framework}: \textbf{NiceGUI}. Built on top of Vue.js and Quasar, it allows for rapid development of modern, responsive web interfaces using only Python.
+    \item \textbf{Data Processing}: \textbf{Pandas}. Used for efficient data manipulation and generating tabular reports.
+    \item \textbf{Visualization}:
+        \begin{itemize}
+            \item \textbf{Plotly}: Renders interactive maps for the Dispatch view.
+            \item \textbf{Apache ECharts}: Renders dynamic bar and pie charts for the Dashboard.
+        \end{itemize}
+\end{itemize}
+
+% -------------------------------------------------------------------
+% SECTION 3: FRAMEWORK SELECTION
+% -------------------------------------------------------------------
+\section{Framework Selection: Why NiceGUI?}
+The choice of NiceGUI over traditional frameworks (Tkinter) or data-scripting tools (Streamlit, Gradio) was driven by specific project requirements.
+
+\subsection{Comparative Analysis}
+\begin{enumerate}
+    \item \textbf{Vs. Tkinter}: Tkinter creates desktop-native windows that look dated and lack responsiveness. NiceGUI creates a web-based interface that is accessible from any browser, supports modern CSS styling (Tailwind), and adapts to different screen sizes.
+    
+    \item \textbf{Vs. Streamlit}: Streamlit is designed for linear data scripts. It re-executes the entire script upon any user interaction, which becomes inefficient for a complex, state-heavy application like GreenBin. NiceGUI uses a persistent state model and WebSockets, allowing for partial UI updates and real-time interactivity without reloading the page.
+    
+    \item \textbf{Vs. Gradio}: Gradio is optimized for ML model demos (Input $\rightarrow$ Model $\rightarrow$ Output). It lacks the layout flexibility required for a multi-page dashboard with complex navigation, tables, and interactive maps.
+\end{enumerate}
+
+\subsection{Meeting Requirements}
+NiceGUI specifically addresses the requirement for an "intuitive user interface" by providing:
+\begin{itemize}
+    \item \textbf{Material Design}: Pre-styled components (Cards, Buttons, Dialogs) ensure a professional look.
+    \item \textbf{Reactivity}: The UI automatically reflects changes in the underlying data structures (e.g., a bin's fill level updating in the table).
+\end{itemize}
+
+% -------------------------------------------------------------------
+% SECTION 4: ALGORITHMIC IMPLEMENTATION
+% -------------------------------------------------------------------
+\section{Detailed Algorithmic Implementation}
+This section provides a deep dive into how specific data structures and algorithms were implemented to meet the project's functional requirements.
+
+\subsection{1. Dynamic Bin Management (Arrays \& Linked Lists)}
+\textbf{Requirement}: Maintain a real-time registry of waste bins.
+
+\textbf{Implementation}:
+We use a dynamic \textbf{Array (Python List)} to store \texttt{Bin} objects. While Linked Lists allow O(1) insertion/deletion at ends, Arrays provide O(1) random access, which is crucial for the dashboard's table view where we need to render specific rows efficiently.
+
+\textbf{Complexity}:
+\begin{itemize}
+    \item Access: $O(1)$
+    \item Search (by ID): $O(n)$ (Linear Search)
+    \item Insertion (Append): $O(1)$ amortized
+\end{itemize}
+
+\subsection{2. Smart Vehicle Dispatch (Priority Queue \& Graphs)}
+\textbf{Requirement}: Prioritize urgent bins and optimize travel routes.
+
+\subsubsection{Priority Queue (Max-Heap)}
+To handle "Urgent Collection", we implement a \textbf{Priority Queue} using a Max-Heap. The heap is organized based on the bin's \texttt{fill\_level}.
+\begin{itemize}
+    \item \textbf{Logic}: When the user clicks "Collect Urgent", all bins with fill level $\ge$ 80\% are pushed onto the heap. The heap property ensures that the bin with the highest fill level is always at the root.
+    \item \textbf{Complexity}: Insertion and Extraction are both $O(\log n)$.
+\end{itemize}
+
+\begin{lstlisting}[language=Python, caption=Priority Queue Implementation]
+class PriorityQueue:
+    def __init__(self):
+        self.heap = []
+    
+    def push(self, item):
+        heapq.heappush(self.heap, (-item.fill_level, item))
+        
+    def pop(self):
+        return heapq.heappop(self.heap)[1]
+\end{lstlisting}
+
+\subsubsection{Graph \& Dijkstra's Algorithm}
+The city is modeled as a weighted undirected \textbf{Graph} where:
+\begin{itemize}
+    \item \textbf{Nodes}: Bins and Facilities.
+    \item \textbf{Edges}: Roads connecting them, weighted by distance (km).
+\end{itemize}
+
+We implement \textbf{Dijkstra's Algorithm} to find the shortest path from a selected bin to the nearest facility. This minimizes fuel consumption and travel time.
+\begin{itemize}
+    \item \textbf{Complexity}: $O(E + V \log V)$ using a Min-Priority Queue.
+\end{itemize}
+
+\subsection{3. Facility Management (AVL Trees & Hash Maps)}
+\textbf{Requirement}: Efficient storage and retrieval of facility data.
+
+\subsubsection{AVL Tree}
+We use a self-balancing \textbf{AVL Tree} to index facilities by their ID.
+\begin{itemize}
+    \item \textbf{Why AVL?}: Unlike a standard Binary Search Tree (BST), an AVL tree maintains a height balance. This guarantees that search, insertion, and deletion operations remain $O(\log n)$ even in the worst case (e.g., inserting sorted IDs), preventing the tree from degenerating into a linked list.
+\end{itemize}
+
+\subsubsection{Hash Map}
+For constant-time lookups, we utilize \textbf{Hash Maps} (Python Dictionaries). This allows the system to instantly retrieve a facility's details given its ID during the routing process.
+\begin{itemize}
+    \item \textbf{Complexity}: Average case $O(1)$ for lookups.
+\end{itemize}
+
+\subsection{4. Sorting Mechanisms (Merge Sort)}
+\textbf{Requirement}: Sort facilities by efficiency and bins by fill level.
+
+\textbf{Implementation}:
+We implemented \textbf{Merge Sort}, a divide-and-conquer algorithm.
+\begin{itemize}
+    \item \textbf{Why Merge Sort?}: It is a \textit{stable} sort, meaning it preserves the relative order of items with equal keys. It also has a guaranteed worst-case time complexity of $O(n \log n)$, making it reliable for large datasets where Quick Sort might degrade to $O(n^2)$.
+\end{itemize}
+
+\subsection{5. Request Management (Queues & Stacks)}
+\textbf{Requirement}: Manage request flow and allow undo operations.
+
+\subsubsection{Queue (FIFO)}
+Incoming collection requests are managed using a \textbf{Queue}.
+\begin{itemize}
+    \item \textbf{Logic}: The "Process Next" button dequeues the request at the front of the line, ensuring a First-In-First-Out (FIFO) fairness policy.
+\end{itemize}
+
+\subsubsection{Stack (LIFO)}
+We implement a global "Undo" feature using a \textbf{Stack}.
+\begin{itemize}
+    \item \textbf{Logic}: Every state-changing action (Dispatch, Add Bin, Update Fill) pushes an inverse action payload onto the \texttt{request\_stack}. Clicking "Undo" pops the top item and reverses the action (e.g., restoring a bin's previous fill level).
+\end{itemize}
+
+% -------------------------------------------------------------------
+% SECTION 5: CONCLUSION
+% -------------------------------------------------------------------
+\section{Conclusion}
+The GreenBin project successfully demonstrates the integration of theoretical computer science concepts into a functional, modern application. By carefully selecting the appropriate data structure for each task—Graphs for routing, Heaps for prioritization, and Trees for indexing—we achieved a system that is not only feature-rich but also computationally efficient. The use of NiceGUI provided the necessary tools to visualize these complex underlying structures in a user-friendly manner.
+
+\end{document}

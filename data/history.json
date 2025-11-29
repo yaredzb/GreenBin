@@ -1,0 +1,491 @@
+[
+  {
+    "timestamp": "2025-11-22 23:27:10",
+    "bin_id": "103",
+    "type": "Recyclable",
+    "area": "(25.214694784939987, 55.27139428910113)",
+    "status": "Collected"
+  },
+  {
+    "timestamp": "2025-11-22 23:27:10",
+    "bin_id": "107",
+    "type": "Industrial",
+    "area": "(25.161559532359625, 55.22162760123073)",
+    "status": "Collected"
+  },
+  {
+    "timestamp": "2025-11-22 23:27:10",
+    "bin_id": "117",
+    "type": "Household",
+    "area": "(25.188082729070636, 55.249142606538)",
+    "status": "Collected"
+  },
+  {
+    "timestamp": "2025-11-22 23:27:10",
+    "bin_id": "105",
+    "type": "Organic",
+    "area": "(25.222641505303642, 55.29533983046098)",
+    "status": "Collected"
+  },
+  {
+    "timestamp": "2025-11-22 23:27:10",
+    "bin_id": "109",
+    "type": "Household",
+    "area": "(25.153788833499522, 55.27589201420669)",
+    "status": "Collected"
+  },
+  {
+    "timestamp": "2025-11-24 15:22:23",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 64
+  },
+  {
+    "timestamp": "2025-11-24 15:22:26",
+    "bin_id": "102",
+    "type": "Organic",
+    "area": "25.2369,55.2556",
+    "status": "Collected",
+    "prev_fill": 76
+  },
+  {
+    "timestamp": "2025-11-24 17:10:36",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 0
+  },
+  {
+    "timestamp": "2025-11-24 17:10:37",
+    "bin_id": "108",
+    "type": "Industrial",
+    "area": "25.2091,55.2954",
+    "status": "Collected",
+    "prev_fill": 60
+  },
+  {
+    "timestamp": "2025-11-24 17:19:07",
+    "bin_id": "106",
+    "type": "Recyclable",
+    "area": "25.1660,55.2946",
+    "status": "Collected",
+    "prev_fill": 59
+  },
+  {
+    "timestamp": "2025-11-24 17:20:13",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 100
+  },
+  {
+    "timestamp": "2025-11-24 20:50:15",
+    "bin_id": "112",
+    "type": "Industrial",
+    "area": "25.2040,55.2324",
+    "status": "Collected",
+    "prev_fill": 34
+  },
+  {
+    "timestamp": "2025-11-24 20:51:46",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 100
+  },
+  {
+    "timestamp": "2025-11-24 20:51:46",
+    "bin_id": "102",
+    "type": "Organic",
+    "area": "25.2369,55.2556",
+    "status": "Collected",
+    "prev_fill": 85
+  },
+  {
+    "timestamp": "2025-11-24 20:52:48",
+    "bin_id": "102",
+    "type": "Organic",
+    "area": "25.2369,55.2556",
+    "status": "Collected",
+    "prev_fill": 0
+  },
+  {
+    "timestamp": "2025-11-24 20:53:48",
+    "bin_id": "103",
+    "type": "Recyclable",
+    "area": "25.2147,55.2714",
+    "status": "Collected",
+    "prev_fill": 100
+  },
+  {
+    "timestamp": "2025-11-24 20:53:48",
+    "bin_id": "104",
+    "type": "Household",
+    "area": "25.2277,55.2768",
+    "status": "Collected",
+    "prev_fill": 100
+  },
+  {
+    "timestamp": "2025-11-24 22:15:09",
+    "bin_id": "102",
+    "type": "Organic",
+    "area": "25.2369,55.2556",
+    "status": "Collected",
+    "prev_fill": 90
+  },
+  {
+    "timestamp": "2025-11-24 22:15:09",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 85
+  },
+  {
+    "timestamp": "2025-11-24 23:06:06",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 27
+  },
+  {
+    "timestamp": "2025-11-24 23:09:17",
+    "bin_id": "107",
+    "type": "Industrial",
+    "area": "25.1616,55.2216",
+    "status": "Collected",
+    "prev_fill": 50
+  },
+  {
+    "timestamp": "2025-11-25 19:27:20",
+    "bin_id": "102",
+    "type": "Organic",
+    "area": "25.2369,55.2556",
+    "status": "Collected",
+    "prev_fill": 100
+  },
+  {
+    "timestamp": "2025-11-25 19:27:31",
+    "bin_id": "110",
+    "type": "Industrial",
+    "area": "25.1765,55.2652",
+    "status": "Collected",
+    "prev_fill": 12
+  },
+  {
+    "timestamp": "2025-11-25 19:27:43",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 0
+  },
+  {
+    "timestamp": "2025-11-25 20:00:36",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 100
+  },
+  {
+    "timestamp": "2025-11-26 10:05:15",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 100
+  },
+  {
+    "timestamp": "2025-11-26 10:10:26",
+    "bin_id": "120",
+    "type": "Recyclable",
+    "area": "25.2408,55.2971",
+    "status": "Collected",
+    "prev_fill": 77
+  },
+  {
+    "timestamp": "2025-11-26 10:10:28",
+    "bin_id": "104",
+    "type": "Household",
+    "area": "25.2277,55.2768",
+    "status": "Collected",
+    "prev_fill": 33
+  },
+  {
+    "timestamp": "2025-11-26 10:57:27",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 95
+  },
+  {
+    "timestamp": "2025-11-26 16:37:10",
+    "bin_id": "103",
+    "type": "Recyclable",
+    "area": "25.2147,55.2714",
+    "status": "Collected",
+    "prev_fill": 94
+  },
+  {
+    "timestamp": "2025-11-26 16:37:10",
+    "bin_id": "102",
+    "type": "Organic",
+    "area": "25.2369,55.2556",
+    "status": "Collected",
+    "prev_fill": 84
+  },
+  {
+    "timestamp": "2025-11-26 16:37:28",
+    "bin_id": "102",
+    "type": "Organic",
+    "area": "25.2369,55.2556",
+    "status": "Collected",
+    "prev_fill": 0
+  },
+  {
+    "timestamp": "2025-11-26 16:38:35",
+    "bin_id": "108",
+    "type": "Industrial",
+    "area": "25.2091,55.2954",
+    "status": "Collected",
+    "prev_fill": 0
+  },
+  {
+    "timestamp": "2025-11-26 16:38:36",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 63
+  },
+  {
+    "timestamp": "2025-11-26 16:38:38",
+    "bin_id": "119",
+    "type": "Organic",
+    "area": "25.1512,55.2900",
+    "status": "Collected",
+    "prev_fill": 52
+  },
+  {
+    "timestamp": "2025-11-27 22:19:07",
+    "bin_id": "105",
+    "type": "Organic",
+    "area": "25.2226,55.2953",
+    "status": "Collected",
+    "prev_fill": 93
+  },
+  {
+    "timestamp": "2025-11-27 22:19:55",
+    "bin_id": "120",
+    "type": "Recyclable",
+    "area": "25.2408,55.2971",
+    "status": "Collected",
+    "prev_fill": 94
+  },
+  {
+    "timestamp": "2025-11-27 22:27:05",
+    "bin_id": "107",
+    "type": "Industrial",
+    "area": "25.1616,55.2216",
+    "status": "Collected",
+    "prev_fill": 92,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-27 22:27:06",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 83,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-28 00:03:10",
+    "bin_id": "107",
+    "type": "Industrial",
+    "area": "25.1616,55.2216",
+    "status": "Collected",
+    "prev_fill": 93,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-28 00:03:11",
+    "bin_id": "115",
+    "type": "Household",
+    "area": "25.1723,55.3019",
+    "status": "Collected",
+    "prev_fill": 52,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:18:58",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 88,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:19:03",
+    "bin_id": "103",
+    "type": "Recyclable",
+    "area": "25.2147,55.2714",
+    "status": "Collected",
+    "prev_fill": 95,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:01",
+    "bin_id": "103",
+    "type": "Recyclable",
+    "area": "25.2147,55.2714",
+    "status": "Collected",
+    "prev_fill": 82,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:09",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 69,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:24",
+    "bin_id": "113",
+    "type": "Recyclable",
+    "area": "25.2251,55.2706",
+    "status": "Collected",
+    "prev_fill": 40,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:35",
+    "bin_id": "118",
+    "type": "Recyclable",
+    "area": "25.2098,55.2339",
+    "status": "Collected",
+    "prev_fill": 57,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:37",
+    "bin_id": "121",
+    "type": "Industrial",
+    "area": "35.2048,55.2708",
+    "status": "Collected",
+    "prev_fill": 50,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:38",
+    "bin_id": "111",
+    "type": "Recyclable",
+    "area": "25.2471,55.2886",
+    "status": "Collected",
+    "prev_fill": 18,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:40",
+    "bin_id": "116",
+    "type": "Recyclable",
+    "area": "25.2102,55.2360",
+    "status": "Collected",
+    "prev_fill": 4,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:30:42",
+    "bin_id": "114",
+    "type": "Industrial",
+    "area": "25.1604,55.3119",
+    "status": "Collected",
+    "prev_fill": 2,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:41:26",
+    "bin_id": "107",
+    "type": "Industrial",
+    "area": "25.1616,55.2216",
+    "status": "Collected",
+    "prev_fill": 62,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:41:45",
+    "bin_id": "108",
+    "type": "Industrial",
+    "area": "25.2091,55.2954",
+    "status": "Collected",
+    "prev_fill": 0,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:41:47",
+    "bin_id": "106",
+    "type": "Recyclable",
+    "area": "25.1660,55.2946",
+    "status": "Collected",
+    "prev_fill": 53,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 14:45:03",
+    "bin_id": "103",
+    "type": "Recyclable",
+    "area": "25.2147,55.2714",
+    "status": "Collected",
+    "prev_fill": 22,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 15:40:42",
+    "bin_id": "115",
+    "type": "Household",
+    "area": "25.1723,55.3019",
+    "status": "Collected",
+    "prev_fill": 85,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 15:51:33",
+    "bin_id": "108",
+    "type": "Industrial",
+    "area": "25.2091,55.2954",
+    "status": "Collected",
+    "prev_fill": 0,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 15:52:59",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 11,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 15:53:01",
+    "bin_id": "106",
+    "type": "Recyclable",
+    "area": "25.1660,55.2946",
+    "status": "Collected",
+    "prev_fill": 0,
+    "source": "request"
+  }
+]
