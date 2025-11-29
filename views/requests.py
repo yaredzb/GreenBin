@@ -27,12 +27,11 @@ def reject_specific_request(bin_id, requests, save_all, refresh_ui):
             return
 
 
-def render_requests(requests, undo_last_action, process_request_action, process_specific_request_fn, reject_specific_request_fn):
+def render_requests(requests, process_request_action, process_specific_request_fn, reject_specific_request_fn):
     """Render the collection requests view."""
     with ui.row().classes("w-full justify-between items-center mb-6"):
         ui.label("Collection Requests").classes("text-2xl font-bold")
         with ui.row().classes("gap-3"):
-            ui.button("Undo Last", on_click=undo_last_action, icon="undo").props("outline color=grey-7")
             ui.button("Process Next", on_click=process_request_action, icon="play_arrow").classes("bg-blue-600 text-white")
     
     # Stats overview

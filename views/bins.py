@@ -5,13 +5,14 @@ from algorithms.sorting import merge_sort
 from algorithms.searching import search_by_substring
 
 
-def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, dispatch_bin_logic):
+def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, dispatch_bin_logic, simulate_updates_action):
     """Render the bin registry and management view."""
     with ui.row().classes("w-full justify-between items-center mb-6"):
         ui.label("Bin Registry & Management").classes("text-2xl font-bold")
         with ui.row().classes("gap-3"):
             ui.button("Add Bin", on_click=open_add_bin_dialog, icon="add").classes("bg-green-600 text-white")
             ui.button("Update Fill", on_click=open_update_fill_dialog, icon="refresh").props("outline color=primary")
+            ui.button("Simulate Updates", on_click=simulate_updates_action, icon="update").props("outline color=secondary")
 
     # Stats overview
     total_bins = len(bins)

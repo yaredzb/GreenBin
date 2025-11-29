@@ -130,11 +130,13 @@ def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bi
                         "scaleSize": 8
                     },
                     "data": [
-                        {"value": status_counts["Critical"], "name": "Critical", "itemStyle": {"color": "#DC2626"}},
-                        {"value": status_counts["High"], "name": "High", "itemStyle": {"color": "#EA580C"}},
-                        {"value": status_counts["Medium"], "name": "Medium", "itemStyle": {"color": "#CA8A04"}},
-                        {"value": status_counts["Low"], "name": "Low", "itemStyle": {"color": "#16A34A"}},
-                        {"value": status_counts["Empty"], "name": "Empty", "itemStyle": {"color": "#6B7280"}}
+                        item for item in [
+                            {"value": status_counts["Critical"], "name": "Critical", "itemStyle": {"color": "#DC2626"}},
+                            {"value": status_counts["High"], "name": "High", "itemStyle": {"color": "#EA580C"}},
+                            {"value": status_counts["Medium"], "name": "Medium", "itemStyle": {"color": "#CA8A04"}},
+                            {"value": status_counts["Low"], "name": "Low", "itemStyle": {"color": "#16A34A"}},
+                            {"value": status_counts["Empty"], "name": "Empty", "itemStyle": {"color": "#6B7280"}}
+                        ] if item["value"] > 0
                     ]
                 }]
             }).classes("h-80")
@@ -183,7 +185,7 @@ def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bi
                     "left": "3%",
                     "right": "4%",
                     "bottom": "10%",
-                    "top": "5%",
+                    "top": "15%",
                     "containLabel": True
                 },
                 "xAxis": [{
@@ -206,6 +208,7 @@ def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bi
                 }],
                 "yAxis": [{
                     "type": "value",
+                    "boundaryGap": [0, 0.2],
                     "name": "Number of Bins",
                     "nameTextStyle": {
                         "color": "#6b7280",
@@ -314,6 +317,7 @@ def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bi
                         "w-full items-center justify-between p-3 border rounded-lg mb-2 recent-collection-card"
                     ):
                         # Left side (bin + timestamp)
+                        # Left side (bin + timestamp)
                         with ui.column().classes("gap-1"):
                             ui.label(f"🗑️ {entry['bin_id']} — {entry['type']}").classes(
                                 "font-semibold text-sm"
@@ -321,11 +325,5 @@ def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bi
                             ui.label(entry["timestamp"]).classes(
                                 "text-xs text-gray-500"
                             )
-
-                        # Right side (Undo button)
-                        ui.button(
-                            "Undo",
-                            on_click=lambda e=entry: undo_specific_history(e, bins, history, save_all, refresh_ui),
-                        ).props("flat color=red size=sm")
             else:
                 ui.label("No recent collections").classes("text-sm text-gray-500")

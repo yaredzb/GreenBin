@@ -1,4 +1,5 @@
 import datetime
+import random
 from dataclasses import dataclass, field, asdict
 
 @dataclass
@@ -8,6 +9,10 @@ class Bin:
     lat: float
     lon: float
     fill_level: int = 0
+
+    def simulate_iot_update(self):
+        # random increment 0-15
+        self.fill_level = min(100, self.fill_level + random.randint(0, 15))
 
     def to_dict(self):
         return asdict(self)

@@ -107,11 +107,13 @@ def get_distance_to_depot(lat, lon):
 
 def show_popup(message, type="info"):
     """Show a popup dialog with a message."""
-    with ui.dialog() as dialog, ui.card():
-        ui.label(message).classes("text-lg font-medium mb-4")
-        with ui.row().classes("w-full justify-end"):
-            ui.button("OK", on_click=dialog.close).classes("bg-blue-600 text-white")
-    dialog.open()
+    if dialog_container:
+        with dialog_container:
+            with ui.dialog() as dialog, ui.card():
+                ui.label(message).classes("text-lg font-medium mb-4")
+                with ui.row().classes("w-full justify-end"):
+                    ui.button("OK", on_click=dialog.close).classes("bg-blue-600 text-white")
+            dialog.open()
 
 def save_all():
     storage.save_bins(bins)
@@ -120,10 +122,11 @@ def save_all():
     storage.save_facilities(facilities)
 
 # ---------- Actions & domain functions ----------
-def dispatch_bin_logic(bin_id):
+def dispatch_bin_logic(bin_id, silent=False):
     bin_obj = next((b for b in bins if b.id == bin_id), None)
     if not bin_obj:
-        show_popup("Bin not found", type="negative")
+        if not silent:
+            show_popup("Bin not found", type="negative")
         return
     prev_fill = bin_obj.fill_level
     bin_obj.fill_level = 0
@@ -140,7 +143,8 @@ def dispatch_bin_logic(bin_id):
     # store undo info on stack (action, payload)
     request_stack.append(("dispatch", record))
     save_all()
-    ui.notify(f"Dispatched and emptied {bin_id}", color="positive")
+    if not silent:
+        show_popup(f"Dispatched and emptied {bin_id}", type="positive")
     refresh_ui()
 
 def request_collection_action(bin_id):
@@ -237,7 +241,7 @@ def collect_urgent_action():
     
     count = 0
     for b in ordered_bins:
-        dispatch_bin_logic(b.id)
+        dispatch_bin_logic(b.id, silent=True)
         count += 1
         
     show_popup(f"Priority Collection: Collected {count} critical bins. Route optimized.", type="positive")
@@ -266,6 +270,15 @@ def update_fill_action(bin_id, new_fill):
     save_all()
     save_all()
     show_popup(f"Updated {bin_id} to {new_fill}%", type="positive")
+    refresh_ui()
+
+def simulate_updates_action():
+    print("Simulating updates...")
+    for b in bins:
+        b.simulate_iot_update()
+    save_all()
+    print("Updates saved. Showing popup.")
+    show_popup("Simulated IoT updates for all bins", type="info")
     refresh_ui()
 
 # ---------- UI helper components ----------
@@ -307,12 +320,12 @@ def refresh_ui():
                     bins, 
                     open_add_bin_dialog, 
                     open_update_fill_dialog, 
-                    dispatch_bin_logic
+                    dispatch_bin_logic,
+                    simulate_updates_action
                 )
             elif current_view == "requests":
                 requests_view.render_requests(
                     requests,
-                    undo_last_action,
                     process_request_action,
                     lambda bid: requests_view.process_specific_request(bid, requests, request_stack, save_all, dispatch_bin_logic, refresh_ui),
                     lambda bid: requests_view.reject_specific_request(bid, requests, save_all, refresh_ui)
@@ -425,11 +438,12 @@ with ui.column().classes("p-8 gap-6 w-full"):
             ui.label("Waste Management Console").classes("text-2xl font-bold text-gray-800")
         
         with ui.row().classes("items-center gap-3"):
-            ui.button("Undo", on_click=undo_last_action, icon="undo").props("flat color=grey-8")
+            ui.button("Undo", on_click=undo_last_action, icon="rotate_left").classes("bg-gray-200 text-gray-800 hover:bg-gray-300")
             ui.button("New Request", on_click=open_request_dialog).classes("bg-orange-500 text-white shadow-md")
-            ui.avatar(icon="person", color="grey-3", text_color="grey-8").classes("ml-2")
+
 
     # content container
+    dialog_container = ui.column().classes("w-full")
     content_container = ui.column().classes("w-full")
     refresh_ui()
 

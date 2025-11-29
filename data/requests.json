@@ -1,12 +1,22 @@
 [
   {
     "bin_id": "101",
-    "timestamp": "2025-11-29 15:53:06",
+    "timestamp": "2025-11-29 20:12:02",
     "status": "Pending"
   },
   {
     "bin_id": "108",
-    "timestamp": "2025-11-29 18:26:16",
+    "timestamp": "2025-11-29 20:12:13",
+    "status": "Pending"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-11-29 20:17:27",
+    "status": "Pending"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-11-29 21:02:29",
     "status": "Pending"
   }
 ]
