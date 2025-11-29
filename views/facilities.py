@@ -3,10 +3,14 @@ from nicegui import ui
 import pandas as pd
 from algorithms.sorting import merge_sort
 from views.components import create_stat_card
+from views.components import create_stat_card
+import services.report_generator as report_gen
 
-def render_facility_report(facilities, facilities_avl):
+def render_facility_report(facilities, facilities_avl, bins, history):
     """Render the facility performance report."""
-    ui.label("Facility Performance Report").classes("text-2xl font-bold mb-6")
+    with ui.row().classes("w-full justify-between items-center mb-6"):
+        ui.label("Facility Performance Report").classes("text-2xl font-bold")
+        ui.button("Download Report", icon="download", on_click=lambda: ui.download(report_gen.generate_professional_report(bins, history, facilities))).classes("bg-blue-600 text-white")
     
     if not facilities:
         with ui.card().classes("w-full p-8 text-center shadow-sm"):

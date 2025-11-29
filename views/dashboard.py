@@ -2,6 +2,7 @@
 from nicegui import ui
 import pandas as pd
 from .components import create_stat_card
+from .components import create_stat_card
 
 
 def get_stats(bins, history, requests):
@@ -11,6 +12,9 @@ def get_stats(bins, history, requests):
     urgent_count = len([b for b in bins if b.fill_level >= 80])
     pending_count = len(requests)
     return total_collections, co2_saved, urgent_count, pending_count
+
+
+
 
 
 def undo_specific_history(entry, bins, history, save_all, refresh_ui):
@@ -31,6 +35,10 @@ def undo_specific_history(entry, bins, history, save_all, refresh_ui):
 def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bin_logic, save_all, refresh_ui):
     """Render the dashboard view."""
     tc, co2, uc, pc = get_stats(bins, history, requests)
+
+    # Header
+    with ui.row().classes("w-full justify-between items-center mb-4"):
+        ui.label("Dashboard Overview").classes("text-2xl font-bold text-gray-800")
 
     # Stats row
     with ui.row().classes("w-full gap-6 mb-6"):

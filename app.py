@@ -105,6 +105,14 @@ def get_distance_to_depot(lat, lon):
 
 # ---------- Utility / Business Logic ----------
 
+def show_popup(message, type="info"):
+    """Show a popup dialog with a message."""
+    with ui.dialog() as dialog, ui.card():
+        ui.label(message).classes("text-lg font-medium mb-4")
+        with ui.row().classes("w-full justify-end"):
+            ui.button("OK", on_click=dialog.close).classes("bg-blue-600 text-white")
+    dialog.open()
+
 def save_all():
     storage.save_bins(bins)
     storage.save_requests(requests)
@@ -115,7 +123,7 @@ def save_all():
 def dispatch_bin_logic(bin_id):
     bin_obj = next((b for b in bins if b.id == bin_id), None)
     if not bin_obj:
-        ui.notify("Bin not found", color="negative")
+        show_popup("Bin not found", type="negative")
         return
     prev_fill = bin_obj.fill_level
     bin_obj.fill_level = 0
@@ -137,18 +145,18 @@ def dispatch_bin_logic(bin_id):
 
 def request_collection_action(bin_id):
     if not any(b.id == bin_id for b in bins):
-        ui.notify("Bin ID not found", color="negative")
+        show_popup("Bin ID not found", type="negative")
         return
     req = models.CollectionRequest(bin_id=bin_id)
     requests.append(req)
     request_stack.append(("request_add", req))
     save_all()
-    ui.notify(f"Request added for {bin_id}", color="positive")
+    show_popup(f"Request added for {bin_id}", type="positive")
     refresh_ui()
 
 def process_request_action():
     if not requests:
-        ui.notify("No pending requests", color="info")
+        show_popup("No pending requests", type="info")
         return
     req = requests.pop(0)
     # dispatch the bin
@@ -158,7 +166,7 @@ def process_request_action():
 
 def undo_last_action():
     if not request_stack:
-        ui.notify("Nothing to undo", color="info")
+        show_popup("Nothing to undo", type="info")
         return
     act, payload = request_stack.pop()
     if act == "request_add":
@@ -166,7 +174,7 @@ def undo_last_action():
         if payload in requests:
             requests.remove(payload)
             save_all()
-            ui.notify(f"Undid request for {payload.bin_id}", color="info")
+            show_popup(f"Undid request for {payload.bin_id}", type="info")
     elif act == "dispatch":
         # payload is the history record
         # restore fill level
@@ -180,8 +188,7 @@ def undo_last_action():
                     history.pop(i)
                     break
             save_all()
-            ui.notify(f"Undo: Restored {b.id} to {b.fill_level}%", color="info")
-            ui.notify(f"Undo: Restored {b.id} to {b.fill_level}%", color="info")
+            show_popup(f"Undo: Restored {b.id} to {b.fill_level}%", type="info")
     elif act == "update_fill":
         # payload is (bin_id, old_fill)
         bid, old_fill = payload
@@ -189,7 +196,7 @@ def undo_last_action():
         if b:
             b.fill_level = old_fill
             save_all()
-            ui.notify(f"Undo: Restored {bid} fill to {old_fill}%", color="info")
+            show_popup(f"Undo: Restored {bid} fill to {old_fill}%", type="info")
     elif act == "add_bin":
         # payload is bin_id
         bid = payload
@@ -197,7 +204,7 @@ def undo_last_action():
         if b:
             bins.remove(b)
             save_all()
-            ui.notify(f"Undo: Removed bin {bid}", color="info")
+            show_popup(f"Undo: Removed bin {bid}", type="info")
     refresh_ui()
 
 def collect_urgent_action():
@@ -212,7 +219,7 @@ def collect_urgent_action():
             critical_bins.append(b)
             
     if not critical_bins:
-        ui.notify("No critical bins (>=80%) to collect", color="info")
+        show_popup("No critical bins (>=80%) to collect", type="info")
         return
 
     # 3. Pop from PQ to get collection order (highest fill first)
@@ -233,7 +240,7 @@ def collect_urgent_action():
         dispatch_bin_logic(b.id)
         count += 1
         
-    ui.notify(f"Priority Collection: Collected {count} critical bins. Route optimized.", color="positive")
+    show_popup(f"Priority Collection: Collected {count} critical bins. Route optimized.", type="positive")
     refresh_ui()
 
 def add_bin_action(id, btype, lat, lon, fill):
@@ -242,21 +249,23 @@ def add_bin_action(id, btype, lat, lon, fill):
         bins.append(new_bin)
         request_stack.append(("add_bin", str(id)))
         save_all()
-        ui.notify(f"Bin {id} added", color="positive")
+        save_all()
+        show_popup(f"Bin {id} added", type="positive")
         refresh_ui()
     except Exception as e:
-        ui.notify(f"Error adding bin: {e}", color="negative")
+        show_popup(f"Error adding bin: {e}", type="negative")
 
 def update_fill_action(bin_id, new_fill):
     b = next((x for x in bins if x.id == bin_id), None)
     if not b:
-        ui.notify("Bin not found", color="negative")
+        show_popup("Bin not found", type="negative")
         return
     old_fill = b.fill_level
     b.fill_level = int(new_fill)
     request_stack.append(("update_fill", (bin_id, old_fill)))
     save_all()
-    ui.notify(f"Updated {bin_id} to {new_fill}%", color="positive")
+    save_all()
+    show_popup(f"Updated {bin_id} to {new_fill}%", type="positive")
     refresh_ui()
 
 # ---------- UI helper components ----------
@@ -313,7 +322,7 @@ def refresh_ui():
             elif current_view == "dispatch":
                 dispatch_view.render_dispatch(bins, facilities, road_graph)
             elif current_view == "facilities":
-                facilities_view.render_facility_report(facilities, facilities_avl)
+                facilities_view.render_facility_report(facilities, facilities_avl, bins, history)
             elif current_view == "predictions":
                 predictions_view.render_predictions(bins, history)
 
