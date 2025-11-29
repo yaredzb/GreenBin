@@ -29,95 +29,106 @@ def render_facility_report(facilities, facilities_avl, bins, history):
         if top_f:
             create_stat_card("Top Performer", top_f.id, f"{top_f.efficiency}% efficiency", border_color="#F59E0B")
 
-    # Efficiency bar chart
-    sorted_facilities = sorted(facilities, key=lambda f: f.efficiency, reverse=True)
-    
-    with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white mb-6"):
-        with ui.row().classes("w-full justify-between items-center mb-4"):
-            ui.label("Efficiency Comparison").classes("text-xl font-bold text-gray-800")
-            ui.label(f"{len(facilities)} facilities").classes("text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full")
+
+
+    def capacity_efficiency_scatter(facilities):
+        """Scatter plot showing capacity vs efficiency relationship."""
         
-        bar_colors = []
-        for f in sorted_facilities:
-            if f.efficiency > 90:
-                bar_colors.append("#10B981")
-            elif f.efficiency >= 70:
-                bar_colors.append("#F59E0B")
-            else:
-                bar_colors.append("#EF4444")
-        
-        ui.echart({
-            "tooltip": {
-                "trigger": "axis",
-                "axisPointer": {"type": "shadow", "shadowStyle": {"color": "rgba(0, 0, 0, 0.05)"}},
-                "formatter": "{b}: {c}%",
-                "backgroundColor": "rgba(255, 255, 255, 0.95)",
-                "borderColor": "#e5e7eb",
-                "borderWidth": 1,
-                "textStyle": {"color": "#374151", "fontSize": 13},
-                "padding": [10, 15]
-            },
-            "grid": {
-                "left": "12%",
-                "right": "8%",
-                "bottom": "5%",
-                "top": "3%",
-                "containLabel": True
-            },
-            "xAxis": {
-                "type": "value",
-                "max": 100,
-                "axisLabel": {
-                    "formatter": "{value}%",
-                    "color": "#6b7280",
-                    "fontSize": 12
+        with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white h-full"):
+            with ui.row().classes("w-full justify-between items-center mb-4"):
+                ui.label("Capacity vs Efficiency Analysis").classes("text-xl font-bold text-gray-800")
+            
+            # Prepare data: [capacity, efficiency, facility_id]
+            scatter_data = []
+            for f in facilities:
+                # Color based on efficiency
+                if f.efficiency > 90:
+                    color = "#10B981"
+                elif f.efficiency >= 70:
+                    color = "#F59E0B"
+                else:
+                    color = "#EF4444"
+                
+                scatter_data.append({
+                    "value": [f.capacity, f.efficiency],
+                    "name": f.id,
+                    "itemStyle": {"color": color}
+                })
+            
+            ui.echart({
+                "tooltip": {
+                    "trigger": "item",
+                    "formatter": "{b}<br/>Capacity: {c0}<br/>Efficiency: {c1}%",
+                    "backgroundColor": "rgba(255, 255, 255, 0.95)",
+                    "borderColor": "#e5e7eb",
+                    "textStyle": {"color": "#374151"}
                 },
-                "axisLine": {"lineStyle": {"color": "#e5e7eb", "width": 2}},
-                "splitLine": {"lineStyle": {"color": "#f3f4f6", "type": "dashed"}}
-            },
-            "yAxis": {
-                "type": "category",
-                "data": [f.id for f in sorted_facilities],
-                "axisLabel": {
-                    "color": "#374151",
-                    "fontSize": 12,
-                    "fontWeight": 500
+                "grid": {
+                    "left": "10%",
+                    "right": "10%",
+                    "bottom": "15%",
+                    "top": "15%",
+                    "containLabel": True
                 },
-                "axisLine": {"lineStyle": {"color": "#e5e7eb", "width": 2}},
-                "axisTick": {"show": False}
-            },
-            "series": [{
-                "name": "Efficiency",
-                "type": "bar",
-                "barWidth": "60%",
-                "data": [
-                    {
-                        "value": f.efficiency,
+                "xAxis": {
+                    "type": "value",
+                    "name": "Capacity",
+                    "nameLocation": "middle",
+                    "nameGap": 30,
+                    "nameTextStyle": {
+                        "fontSize": 12,
+                        "fontWeight": "bold",
+                        "color": "#374151"
+                    },
+                    "axisLabel": {
+                        "color": "#6b7280",
+                        "fontSize": 11
+                    },
+                    "splitLine": {"lineStyle": {"color": "#f3f4f6", "type": "dashed"}}
+                },
+                "yAxis": {
+                    "type": "value",
+                    "name": "Efficiency (%)",
+                    "nameLocation": "middle",
+                    "nameGap": 40,
+                    "nameTextStyle": {
+                        "fontSize": 12,
+                        "fontWeight": "bold",
+                        "color": "#374151"
+                    },
+                    "max": 100,
+                    "axisLabel": {
+                        "formatter": "{value}%",
+                        "color": "#6b7280",
+                        "fontSize": 11
+                    },
+                    "splitLine": {"lineStyle": {"color": "#f3f4f6", "type": "dashed"}}
+                },
+                "series": [{
+                    "type": "scatter",
+                    "symbolSize": 15,
+                    "data": scatter_data,
+                    "emphasis": {
                         "itemStyle": {
-                            "color": bar_colors[i],
-                            "borderRadius": [0, 6, 6, 0],
-                            "shadowBlur": 8,
-                            "shadowColor": "rgba(0, 0, 0, 0.1)",
-                            "shadowOffsetX": 2
-                        }
-                    } for i, f in enumerate(sorted_facilities)
-                ],
-                "label": {
-                    "show": True,
-                    "position": "right",
-                    "formatter": "{c}%",
-                    "fontSize": 12,
-                    "fontWeight": "600",
-                    "color": "#374151"
-                },
-                "emphasis": {
-                    "itemStyle": {
-                        "shadowBlur": 15,
-                        "shadowColor": "rgba(0, 0, 0, 0.2)"
+                            "shadowBlur": 10,
+                            "shadowColor": "rgba(0, 0, 0, 0.3)"
+                        },
+                        "scale": True,
+                        "scaleSize": 1.2
+                    },
+                    "label": {
+                        "show": True,
+                        "position": "top",
+                        "formatter": "{b}",
+                        "fontSize": 10,
+                        "color": "#374151"
                     }
-                }
-            }]
-        }).classes("h-64" if len(facilities) <= 5 else "h-96")
+                }]
+            }).classes("h-64")
+
+    # Render Charts
+    with ui.row().classes("w-full mb-6"):
+        capacity_efficiency_scatter(facilities)
 
     # Data table section
     with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):

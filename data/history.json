@@ -604,5 +604,52 @@
     "status": "Collected",
     "prev_fill": 84,
     "source": "request"
+  },
+  {
+    "timestamp": "2025-11-29 21:44:01",
+    "bin_id": "113",
+    "type": "Recyclable",
+    "area": "25.2251,55.2706",
+    "status": "Collected",
+    "prev_fill": 100,
+    "source": "request"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-11-29 21:44:08",
+    "status": "Request Processed",
+    "action": "Created",
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-11-29 21:44:53",
+    "status": "Updated",
+    "prev_fill": 54,
+    "new_fill": 50,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-11-29 22:49:53",
+    "status": "Request Processed",
+    "action": "Created",
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-11-29 22:55:47",
+    "status": "Request Processed",
+    "action": "Processed",
+    "type": "Industrial"
+  },
+  {
+    "timestamp": "2025-11-29 22:55:47",
+    "bin_id": "101",
+    "type": "Industrial",
+    "area": "25.2140,55.2412",
+    "status": "Collected",
+    "prev_fill": 50,
+    "source": "request"
   }
 ]

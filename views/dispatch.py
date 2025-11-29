@@ -33,11 +33,11 @@ def render_dispatch(bins, facilities, road_graph):
     
     # Containers
     map_container = ui.column().classes("w-full mb-4")
-    table_container = ui.column().classes("w-full")
+
     
     def update_view():
         map_container.clear()
-        table_container.clear()
+
         
         # Path calculation for map (if needed)
         path = []
@@ -138,27 +138,7 @@ def render_dispatch(bins, facilities, road_graph):
             )
             ui.plotly(fig).classes("w-full h-96 rounded-lg shadow-md")
 
-        # Table of urgent bins to dispatch
-        with table_container:
-            ui.label("Dispatch Queue").classes("text-lg font-semibold mb-2")
-            if urg:
-                import pandas as pd
-                df = pd.DataFrame([
-                    {"id": b.id, "type": b.waste_type, "fill": b.fill_level, "loc": f"{b.lat:.4f},{b.lon:.4f}"}
-                    for b in urg
-                ])
-                ui.table(
-                    columns=[
-                        {"name":"id","label":"Bin ID","field":"id"},
-                        {"name":"type","label":"Type","field":"type"},
-                        {"name":"fill","label":"Fill %","field":"fill"},
-                        {"name":"loc","label":"Location","field":"loc"},
-                    ],
-                    rows=df.to_dict('records'),
-                    pagination=10
-                ).classes("w-full shadow-md").props('bordered flat separator="cell"')
-            else:
-                ui.label("No urgent bins").classes("text-gray-500")
+
     
     selected_bin.on_value_change(lambda: update_view())
     show_all_bins.on_value_change(lambda: update_view())

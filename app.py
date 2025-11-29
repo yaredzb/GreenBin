@@ -18,80 +18,18 @@ from algorithms.sorting import merge_sort
 from algorithms.searching import search_by_substring, linear_search
 from structures.min_heap import MinHeap
 
+import state
+
 # ---------- State & Data ----------
-bins = storage.load_bins()
-requests = storage.load_requests()
-history = storage.load_history()
-facilities = storage.load_facilities()
-request_stack = deque()
-current_view = "dashboard"  # Initialize current view
-
-# AVL Tree for Facility Lookup (Key: Facility ID)
-facilities_avl = AVLTree()
-for f in facilities:
-    facilities_avl.insert(f.id, f)
-
-# seed sample bins if empty (keeps previous logic)
-if not bins:
-    for i in range(1, 21):
-        b_id = f"B{100 + i}"
-        b_type = random.choice(["Household", "Industrial", "Recyclable", "Organic"])
-        b_lat = 25.2048 + random.uniform(-0.04, 0.04)
-        b_lon = 55.2708 + random.uniform(-0.04, 0.04)
-        b_fill = random.randint(0, 95)
-        bins.append(models.Bin(id=b_id, waste_type=b_type, lat=b_lat, lon=b_lon, fill_level=b_fill))
-    storage.save_bins(bins)
-
-# seed facilities if empty
-if not facilities:
-    for i in range(1, 6):
-        f_id = f"F{100 + i}"
-        f_lat = 25.2048 + random.uniform(-0.02, 0.02)
-        f_lon = 55.2708 + random.uniform(-0.02, 0.02)
-        f_cap = random.randint(1000, 5000)
-        f_eff = round(random.uniform(50.0, 99.9), 1)
-        new_f = Facility(id=f_id, lat=f_lat, lon=f_lon, capacity=f_cap, efficiency=f_eff)
-        facilities.append(new_f)
-        facilities_avl.insert(new_f.id, new_f)
-    storage.save_facilities(facilities)
-
-# Build road network graph for Dijkstra's algorithm
-road_graph = Graph()
-
-def build_road_network():
-    """Build road network connecting bins and facilities."""
-    global road_graph
-    road_graph = Graph()
-    
-    # Add all bins and facilities as nodes
-    for b in bins:
-        road_graph.add_node(b.id, b.lat, b.lon)
-    for f in facilities:
-        road_graph.add_node(f.id, f.lat, f.lon)
-    
-    # Connect each bin to its 3 nearest neighbors
-    all_nodes = [(b.id, b.lat, b.lon) for b in bins] + [(f.id, f.lat, f.lon) for f in facilities]
-    
-    for node_id, lat, lon in all_nodes:
-        # Find 3 nearest neighbors
-        distances = []
-        for other_id, other_lat, other_lon in all_nodes:
-            if node_id != other_id:
-                dist = routing.calculate_distance(lat, lon, other_lat, other_lon) * 111  # km
-                distances.append((dist, other_id))
-        
-        distances.sort()
-        for dist, neighbor_id in distances[:3]:
-            road_graph.add_edge(node_id, neighbor_id, dist)
-    
-    # Ensure each bin has direct connection to nearest facility
-    for b in bins:
-        nearest_facility = min(facilities, 
-                              key=lambda f: routing.calculate_distance(b.lat, b.lon, f.lat, f.lon))
-        dist = routing.calculate_distance(b.lat, b.lon, nearest_facility.lat, nearest_facility.lon) * 111
-        road_graph.add_edge(b.id, nearest_facility.id, dist)
-
-build_road_network()
+# ---------- State & Data ----------
+# Imported from state.py: bins, requests, history, facilities, request_stack, facilities_avl, road_graph
+bins = state.bins
+requests = state.requests
+history = state.history
+facilities = state.facilities
+request_stack = state.request_stack
+facilities_avl = state.facilities_avl
+road_graph = state.road_graph
 
 # UI state
 current_view = "dashboard"   # dashboard, bins, requests, history, dispatch, facilities, predictions
@@ -116,10 +54,7 @@ def show_popup(message, type="info"):
             dialog.open()
 
 def save_all():
-    storage.save_bins(bins)
-    storage.save_requests(requests)
-    storage.save_history(history)
-    storage.save_facilities(facilities)
+    state.save_all()
 
 # ---------- Actions & domain functions ----------
 def dispatch_bin_logic(bin_id, silent=False):
@@ -153,6 +88,14 @@ def request_collection_action(bin_id):
         return
     req = models.CollectionRequest(bin_id=bin_id)
     requests.append(req)
+    # Log to history
+    history.append({
+        "bin_id": bin_id,
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "status": "Request Processed",
+        "action": "Created",
+        "type": next((b.waste_type for b in bins if b.id == bin_id), "Unknown")
+    })
     request_stack.append(("request_add", req))
     save_all()
     show_popup(f"Request added for {bin_id}", type="positive")
@@ -163,6 +106,14 @@ def process_request_action():
         show_popup("No pending requests", type="info")
         return
     req = requests.pop(0)
+    # Log to history
+    history.append({
+        "bin_id": req.bin_id,
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "status": "Request Processed",
+        "action": "Processed",
+        "type": next((b.waste_type for b in bins if b.id == req.bin_id), "Unknown")
+    })
     # dispatch the bin
     dispatch_bin_logic(req.bin_id)
     save_all()
@@ -172,28 +123,36 @@ def undo_last_action():
     if not request_stack:
         show_popup("Nothing to undo", type="info")
         return
-    act, payload = request_stack.pop()
-    if act == "request_add":
-        # payload is CollectionRequest instance
-        if payload in requests:
-            requests.remove(payload)
-            save_all()
-            show_popup(f"Undid request for {payload.bin_id}", type="info")
-    elif act == "dispatch":
-        # payload is the history record
-        # restore fill level
-        rec = payload
-        b = next((x for x in bins if x.id == rec["bin_id"]), None)
+    
+    action, payload = request_stack.pop()
+    
+    if action == "dispatch":
+        # payload is history record
+        entry = payload
+        # We need to define undo_specific_history logic here or import it?
+        # Actually undo_specific_history was in dashboard.py but logic is simple
+        # Restore fill level
+        b = next((x for x in bins if x.id == entry["bin_id"]), None)
         if b:
-            b.fill_level = rec.get("prev_fill", 0)
-            # remove last matching history entry
-            for i in range(len(history)-1, -1, -1):
-                if history[i].get("bin_id") == rec["bin_id"] and history[i].get("timestamp") == rec["timestamp"]:
-                    history.pop(i)
-                    break
+            b.fill_level = entry.get("prev_fill", 0)
+            # Remove from history
+            if entry in history:
+                history.remove(entry)
             save_all()
             show_popup(f"Undo: Restored {b.id} to {b.fill_level}%", type="info")
-    elif act == "update_fill":
+            
+    elif action == "request_add":
+        # payload is request object
+        req = payload
+        if req in requests:
+            requests.remove(req)
+            # Remove history log if possible?
+            # We didn't store the history log in stack, but we can try to find it
+            # For now just remove request
+            save_all()
+            show_popup(f"Undo: Removed request for {req.bin_id}", type="info")
+            
+    elif action == "update_fill":
         # payload is (bin_id, old_fill)
         bid, old_fill = payload
         b = next((x for x in bins if x.id == bid), None)
@@ -201,7 +160,8 @@ def undo_last_action():
             b.fill_level = old_fill
             save_all()
             show_popup(f"Undo: Restored {bid} fill to {old_fill}%", type="info")
-    elif act == "add_bin":
+            
+    elif action == "add_bin":
         # payload is bin_id
         bid = payload
         b = next((x for x in bins if x.id == bid), None)
@@ -266,6 +226,17 @@ def update_fill_action(bin_id, new_fill):
         return
     old_fill = b.fill_level
     b.fill_level = int(new_fill)
+    
+    # Log to history
+    history.append({
+        "bin_id": bin_id,
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "status": "Updated",
+        "prev_fill": old_fill,
+        "new_fill": new_fill,
+        "type": b.waste_type
+    })
+    
     request_stack.append(("update_fill", (bin_id, old_fill)))
     save_all()
     save_all()
@@ -325,10 +296,9 @@ def refresh_ui():
                 )
             elif current_view == "requests":
                 requests_view.render_requests(
-                    requests,
                     process_request_action,
-                    lambda bid: requests_view.process_specific_request(bid, requests, request_stack, save_all, dispatch_bin_logic, refresh_ui),
-                    lambda bid: requests_view.reject_specific_request(bid, requests, save_all, refresh_ui)
+                    lambda bid: requests_view.process_specific_request(bid, save_all, dispatch_bin_logic, refresh_ui),
+                    lambda bid: requests_view.reject_specific_request(bid, save_all, refresh_ui)
                 )
             elif current_view == "history":
                 history_view.render_history(history, get_distance_to_depot)

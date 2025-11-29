@@ -182,7 +182,7 @@ def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bi
                     "padding": [10, 15]
                 },
                 "grid": {
-                    "left": "3%",
+                    "left": "10%",
                     "right": "4%",
                     "bottom": "10%",
                     "top": "15%",

@@ -24,21 +24,24 @@ def render_history(history, get_distance_to_depot_fn):
     """Render the history view."""
     ui.label("Collection History").classes("text-2xl font-bold mb-4")
     
+    # Metrics container (above tabs)
+    d_metrics = ui.row().classes("w-full gap-4 mb-4")
+
     # Create tabs for different history types
     with ui.tabs().classes("w-full").props("align=justify") as tabs:
         tab_dispatch = ui.tab("Dispatch History")
         tab_update = ui.tab("Update Bin History")
         tab_request = ui.tab("Request History")
     
-    with ui.tab_panels(tabs, value=tab_dispatch).classes("w-full"):
+    with ui.tab_panels(tabs, value=tab_dispatch).classes("w-full bg-transparent"):
         # Dispatch History Tab
-        with ui.tab_panel(tab_dispatch):
-            d_search, d_area, d_type, d_sort = create_history_filters(
-                sort_options=["Recent First", "Bin ID", "Distance", "CO2 Saved"]
-            )
-            
-            d_metrics = ui.row().classes("w-full gap-4 mb-4")
-            d_table = ui.column().classes("w-full")
+        with ui.tab_panel(tab_dispatch).classes("p-0"):
+            with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
+                d_search, d_area, d_type, d_sort = create_history_filters(
+                    sort_options=["Recent First", "Bin ID", "Distance", "CO2 Saved"]
+                )
+                
+                d_table = ui.column().classes("w-full")
             
             def refresh_dispatch_history():
                 d_table.clear()
@@ -116,11 +119,11 @@ def render_history(history, get_distance_to_depot_fn):
                 with d_table:
                     ui.table(
                         columns=[
-                            {"name":"bin_id","label":"Bin ID","field":"bin_id"},
-                            {"name":"type","label":"Type","field":"type"},
-                            {"name":"dist","label":"Distance (km)","field":"distance"},
-                            {"name":"co2","label":"CO2 (kg)","field":"co2"},
-                            {"name":"time","label":"Time","field":"timestamp"},
+                            {"name":"bin_id","label":"Bin ID","field":"bin_id", "align": "left"},
+                            {"name":"type","label":"Type","field":"type", "align": "left"},
+                            {"name":"dist","label":"Distance (km)","field":"distance", "align": "left"},
+                            {"name":"co2","label":"CO2 (kg)","field":"co2", "align": "left"},
+                            {"name":"time","label":"Time","field":"timestamp", "align": "left"},
                         ],
                         rows=rows,
                         pagination=10
@@ -133,9 +136,10 @@ def render_history(history, get_distance_to_depot_fn):
             refresh_dispatch_history()
 
         # Update Bin History Tab
-        with ui.tab_panel(tab_update):
-            u_search, u_area, u_type, u_sort = create_history_filters()
-            u_table = ui.column().classes("w-full")
+        with ui.tab_panel(tab_update).classes("p-0"):
+            with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
+                u_search, u_area, u_type, u_sort = create_history_filters()
+                u_table = ui.column().classes("w-full")
             
             def refresh_update_history():
                 u_table.clear()
@@ -163,11 +167,11 @@ def render_history(history, get_distance_to_depot_fn):
                 with u_table:
                     ui.table(
                         columns=[
-                            {"name":"bin_id","label":"Bin ID","field":"bin_id"},
-                            {"name":"type","label":"Type","field":"type"},
-                            {"name":"prev","label":"Prev Fill","field":"prev_fill"},
-                            {"name":"new","label":"New Fill","field":"new_fill"},
-                            {"name":"time","label":"Time","field":"timestamp"},
+                            {"name":"bin_id","label":"Bin ID","field":"bin_id", "align": "left"},
+                            {"name":"type","label":"Type","field":"type,", "align": "left"},
+                            {"name":"prev","label":"Prev Fill","field":"prev_fill", "align": "left"},
+                            {"name":"new","label":"New Fill","field":"new_fill", "align": "left"},
+                            {"name":"time","label":"Time","field":"timestamp", "align": "left"},
                         ],
                         rows=rows,
                         pagination=10
@@ -179,9 +183,10 @@ def render_history(history, get_distance_to_depot_fn):
             refresh_update_history()
 
         # Request History Tab
-        with ui.tab_panel(tab_request):
-            r_search, r_area, r_type, r_sort = create_history_filters()
-            r_table = ui.column().classes("w-full")
+        with ui.tab_panel(tab_request).classes("p-0"):
+            with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
+                r_search, r_area, r_type, r_sort = create_history_filters()
+                r_table = ui.column().classes("w-full")
             
             def refresh_request_history():
                 r_table.clear()
@@ -209,10 +214,10 @@ def render_history(history, get_distance_to_depot_fn):
                 with r_table:
                     ui.table(
                         columns=[
-                            {"name":"bin_id","label":"Bin ID","field":"bin_id"},
-                            {"name":"type","label":"Type","field":"type"},
-                            {"name":"action","label":"Action","field":"action"},
-                            {"name":"time","label":"Time","field":"timestamp"},
+                            {"name":"bin_id","label":"Bin ID","field":"bin_id", "align": "left"},
+                            {"name":"type","label":"Type","field":"type", "align": "left"},
+                            {"name":"action","label":"Action","field":"action", "align": "left"},
+                            {"name":"time","label":"Time","field":"timestamp", "align": "left"},
                         ],
                         rows=rows,
                         pagination=10
