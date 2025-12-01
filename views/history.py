@@ -148,7 +148,7 @@ def render_history(history, get_distance_to_depot_fn):
                 sort_by = u_sort.value
                 
                 # Filter updates
-                updates = [h for h in history if h.get('status') == 'Updated']
+                updates = [h for h in history if h.get('status') in ['Updated', 'IoT Update']]
                 
                 if type_filter != "All":
                     updates = [h for h in updates if h.get('type') == type_filter]

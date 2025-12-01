@@ -5,7 +5,7 @@ from algorithms.sorting import merge_sort
 from algorithms.searching import search_by_substring
 
 
-def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, dispatch_bin_logic, simulate_updates_action):
+def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, dispatch_bin_logic, simulate_updates_action, collect_urgent_action):
     """Render the bin registry and management view."""
     with ui.row().classes("w-full justify-between items-center mb-6"):
         ui.label("Bin Registry & Management").classes("text-2xl font-bold")
@@ -34,7 +34,9 @@ def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, disp
     with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
         with ui.row().classes("w-full justify-between items-center mb-4"):
             ui.label("Bin Directory").classes("text-xl font-bold text-gray-800")
-            ui.label(f"{len(bins)} bins registered").classes("text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full")
+            with ui.row().classes("gap-3 items-center"):
+                ui.button("Collect All", on_click=collect_urgent_action, icon="cleaning_services").classes("bg-red-500 text-white")
+                ui.label(f"{len(bins)} bins registered").classes("text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full")
         
         with ui.row().classes("w-full gap-4 mb-4"):
             search_input = ui.input(placeholder="Search by Bin ID...").classes("flex-1").props("outlined dense")

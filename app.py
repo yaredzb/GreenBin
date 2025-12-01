@@ -1,4 +1,5 @@
 from nicegui import ui, app
+import asyncio
 from views import dashboard, bins as bins_view, requests as requests_view, history as history_view, dispatch as dispatch_view, facilities as facilities_view, predictions as predictions_view
 from views.components import create_stat_card
 from collections import deque
@@ -57,7 +58,7 @@ def save_all():
     state.save_all()
 
 # ---------- Actions & domain functions ----------
-def dispatch_bin_logic(bin_id, silent=False):
+def dispatch_bin_logic(bin_id, silent=False, refresh=True):
     bin_obj = next((b for b in bins if b.id == bin_id), None)
     if not bin_obj:
         if not silent:
@@ -80,7 +81,8 @@ def dispatch_bin_logic(bin_id, silent=False):
     save_all()
     if not silent:
         show_popup(f"Dispatched and emptied {bin_id}", type="positive")
-    refresh_ui()
+    if refresh:
+        refresh_ui()
 
 def request_collection_action(bin_id):
     if not any(b.id == bin_id for b in bins):
@@ -171,7 +173,18 @@ def undo_last_action():
             show_popup(f"Undo: Removed bin {bid}", type="info")
     refresh_ui()
 
-def collect_urgent_action():
+async def run_urgent_collection_sequence(ordered_bins, client):
+    with client:
+        count = 0
+        for b in ordered_bins:
+            dispatch_bin_logic(b.id, silent=True, refresh=True)
+            count += 1
+            ui.notify(f"Priority Collection: Bin {b.id} emptied", type="positive")
+            await asyncio.sleep(random.uniform(3, 5))
+            
+        show_popup(f"Priority Collection: Collected {count} bins based on priority. Route optimized.", type="positive")
+
+async def collect_urgent_action():
     # 1. Identify Critical Bins (>= 85%)
     # 2. Add to Priority Queue (Max-Heap based on fill level)
     pq = PriorityQueue()
@@ -195,17 +208,35 @@ def collect_urgent_action():
     # 4. Route Optimization (Dijkstra / Nearest Neighbor)
     # Start from Depot (25.2048, 55.2708)
     depot_lat, depot_lon = 25.2048, 55.2708
-    optimized_path_coords = routing.optimize_route(depot_lat, depot_lon, ordered_bins)
+    # optimized_path_coords = routing.optimize_route(depot_lat, depot_lon, ordered_bins)
     
-    # 5. Dispatch in optimized order
+    # 5. Dispatch in optimized order (Background Task)
+    # Capture client context
+    client = ui.context.client
+    asyncio.create_task(run_urgent_collection_sequence(ordered_bins, client))
+
+async def collect_all_bins_action():
+    # 1. Add ALL bins to Priority Queue (Max-Heap based on fill level)
+    pq = PriorityQueue()
+    all_bins = []
     
-    count = 0
-    for b in ordered_bins:
-        dispatch_bin_logic(b.id, silent=True)
-        count += 1
+    for b in bins:
+        if b.fill_level > 0: # Only collect non-empty bins
+            pq.push(b)
+            all_bins.append(b)
+            
+    if not all_bins:
+        show_popup("No bins to collect", type="info")
+        return
+
+    # 2. Pop from PQ to get collection order (highest fill first)
+    ordered_bins = []
+    while len(pq) > 0:
+        ordered_bins.append(pq.pop())
         
-    show_popup(f"Priority Collection: Collected {count} critical bins. Route optimized.", type="positive")
-    refresh_ui()
+    # 3. Dispatch in optimized order (Background Task)
+    client = ui.context.client
+    asyncio.create_task(run_urgent_collection_sequence(ordered_bins, client))
 
 def add_bin_action(id, btype, lat, lon, fill):
     try:
@@ -245,11 +276,23 @@ def update_fill_action(bin_id, new_fill):
 
 def simulate_updates_action():
     print("Simulating updates...")
+    updates_count = 0
     for b in bins:
+        old_fill = b.fill_level
         b.simulate_iot_update()
+        if b.fill_level != old_fill:
+            history.append({
+                "bin_id": b.id,
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "status": "IoT Update",
+                "prev_fill": old_fill,
+                "new_fill": b.fill_level,
+                "type": b.waste_type
+            })
+            updates_count += 1
     save_all()
-    print("Updates saved. Showing popup.")
-    show_popup("Simulated IoT updates for all bins", type="info")
+    print(f"Updates saved. {updates_count} bins updated. Showing popup.")
+    show_popup(f"Simulated IoT updates for {updates_count} bins", type="info")
     refresh_ui()
 
 # ---------- UI helper components ----------
@@ -292,7 +335,8 @@ def refresh_ui():
                     open_add_bin_dialog, 
                     open_update_fill_dialog, 
                     dispatch_bin_logic,
-                    simulate_updates_action
+                    simulate_updates_action,
+                    collect_all_bins_action
                 )
             elif current_view == "requests":
                 requests_view.render_requests(

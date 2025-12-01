@@ -23,5 +23,10 @@
     "bin_id": "120",
     "timestamp": "2025-11-29 22:49:53",
     "status": "Pending"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-01 11:47:27",
+    "status": "Pending"
   }
 ]
