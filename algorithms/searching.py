@@ -37,24 +37,4 @@ def search_by_substring(items, field_getter, query):
     return results
 
 
-def filter_by_criteria(items, **criteria):
-    """
-    Filter items using multiple criteria (exact match).
-    
-    Args:
-        items: List of dict items to filter
-        **criteria: Key-value pairs to match
-    
-    Returns:
-        List of matching items
-    """
-    results = []
-    for item in items:
-        match = True
-        for key, value in criteria.items():
-            if item.get(key) != value:
-                match = False
-                break
-        if match:
-            results.append(item)
-    return results
+

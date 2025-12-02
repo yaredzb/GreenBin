@@ -1,5 +1,5 @@
 class HashMap:
-    """Simple separate-chaining hash map for educational purposes."""
+    """Simple separate-chaining hash map"""
 
     def __init__(self, capacity=101):
         self.capacity = capacity
