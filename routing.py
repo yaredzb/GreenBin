@@ -5,9 +5,6 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     # Simple Euclidean distance approximation for small areas
     return sqrt((lat1 - lat2)**2 + (lon1 - lon2)**2)
 
-def get_urgent_bins(bins, threshold=80):
-    # Return bins with fill level >= threshold, sorted by fill level (desc)
-    return sorted([b for b in bins if b.fill_level >= threshold], key=lambda x: x.fill_level, reverse=True)
 
 def optimize_route(start_lat, start_lon, bins):
     """

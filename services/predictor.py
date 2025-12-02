@@ -31,17 +31,6 @@ class OverflowPredictor:
                 # Already overflowing
                 heap.push(0, b)
                 continue
-            
-            if b.fill_level == 0:
-                # Empty bin - will take longest to overflow
-                # Calculate based on fill rate
-                rate = self._calculate_fill_rate(b, bin_history.get(b.id, []))
-                if rate > 0:
-                    hours_left = 100 / rate  # Time to fill from 0% to 100%
-                else:
-                    hours_left = 9999
-                heap.push(hours_left, b)
-                continue
 
             # Calculate fill rate from historical data
             rate = self._calculate_fill_rate(b, bin_history.get(b.id, []))
@@ -58,6 +47,23 @@ class OverflowPredictor:
         # Return sorted list (min-heap ensures soonest overflow first)
         return heap.to_list()
     
+    def _parse_timestamp(self, ts_str):
+        """Helper to parse timestamp string (ISO or old format)."""
+        dt = None
+        try:
+            dt = datetime.datetime.fromisoformat(ts_str)
+        except ValueError:
+            try:
+                dt = datetime.datetime.strptime(ts_str, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                return None
+        
+        # Ensure timezone awareness (assume UTC if naive)
+        if dt and dt.tzinfo is None:
+            dt = dt.replace(tzinfo=datetime.timezone.utc)
+        
+        return dt
+
     def _calculate_fill_rate(self, bin_obj, bin_events):
         """
         Calculate fill rate (% per hour) from historical data.
@@ -67,34 +73,65 @@ class OverflowPredictor:
             # Insufficient data - use waste type heuristic
             return self._get_heuristic_rate(bin_obj.waste_type)
         
-        # Calculate fill rates between collection events
-        fill_rates = []
+        # Method 1: Calculate fill rates between collection events
+        fill_rates_from_collections = []
+        
+        # Find all collection events
+        collection_events = [e for e in bin_events if e.get('status') == 'Collected']
+        
+        for i in range(len(collection_events) - 1):
+            current_collection = collection_events[i]
+            next_collection = collection_events[i + 1]
+            
+            # The fill level before next collection tells us how much accumulated
+            if 'prev_fill' in next_collection:
+                fill_amount = next_collection.get('prev_fill', 0)
+                
+                # Calculate time difference between collections
+                t1 = self._parse_timestamp(current_collection.get('timestamp'))
+                t2 = self._parse_timestamp(next_collection.get('timestamp'))
+                
+                if t1 and t2:
+                    hours_diff = (t2 - t1).total_seconds() / 3600
+                    if hours_diff > 0:
+                        rate = fill_amount / hours_diff
+                        fill_rates_from_collections.append(rate)
+        
+        # Method 2: Calculate rate from any consecutive events with fill level data
+        fill_rates_from_status = []
         
         for i in range(len(bin_events) - 1):
             current = bin_events[i]
             next_event = bin_events[i + 1]
             
-            # Only calculate rate if we have prev_fill data (from dispatch/collection)
-            if 'prev_fill' in next_event and current.get('status') == 'Collected':
-                # After collection, bin was at 0%
-                # Before next collection, bin was at prev_fill%
-                fill_amount = next_event.get('prev_fill', 0)
-                
-                # Calculate time difference
-                try:
-                    t1 = datetime.datetime.strptime(current.get('timestamp'), "%Y-%m-%d %H:%M:%S")
-                    t2 = datetime.datetime.strptime(next_event.get('timestamp'), "%Y-%m-%d %H:%M:%S")
-                    hours_diff = (t2 - t1).total_seconds() / 3600
-                    
-                    if hours_diff > 0:
-                        rate = fill_amount / hours_diff
-                        fill_rates.append(rate)
-                except:
+            # If we have fill levels for both events
+            current_fill = current.get('fill_level')
+            next_fill = next_event.get('fill_level') or next_event.get('prev_fill')
+            
+            if current_fill is not None and next_fill is not None:
+                # Skip if it's a collection (sudden drop to 0)
+                if current.get('status') == 'Collected':
                     continue
+                    
+                fill_change = next_fill - current_fill
+                
+                # Only consider positive changes (bins filling up, not being emptied)
+                if fill_change > 0:
+                    t1 = self._parse_timestamp(current.get('timestamp'))
+                    t2 = self._parse_timestamp(next_event.get('timestamp'))
+                    
+                    if t1 and t2:
+                        hours_diff = (t2 - t1).total_seconds() / 3600
+                        if hours_diff > 0:
+                            rate = fill_change / hours_diff
+                            fill_rates_from_status.append(rate)
         
-        if fill_rates:
+        # Combine all valid rates
+        all_rates = fill_rates_from_collections + fill_rates_from_status
+        
+        if all_rates:
             # Return average fill rate from historical data
-            avg_rate = sum(fill_rates) / len(fill_rates)
+            avg_rate = sum(all_rates) / len(all_rates)
             return max(0.1, avg_rate)  # Minimum 0.1% per hour
         
         # Fallback to heuristic if no valid rates calculated

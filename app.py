@@ -407,7 +407,7 @@ def open_request_dialog():
 # ---------- Top-level UI (layout) ----------
 ui.colors(primary='#10b981', secondary='#3B82F6', accent='#EF4444')
 
-with ui.left_drawer(value=True).classes("w-64 border-r pt-6"):
+with ui.left_drawer(value=True).classes("w-64 pt-6 bg-gray-70"):
     with ui.column().classes("p-6 gap-3 w-full"):
         ui.label("GreenBin").classes("text-4xl font-bold w-full text-center")
         ui.label("Smart Waste Collection").classes("text-xs text-gray-500 mb-4 w-full text-center")

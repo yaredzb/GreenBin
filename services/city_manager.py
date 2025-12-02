@@ -15,14 +15,17 @@ class CityManager:
         self.bins_list = LinkedList()
         for b in bins:
             self.bins_list.add(b)
-        # facilities in AVL keyed by facility id (you could key by capacity too)
+
+        # facilities in AVL keyed by facility id 
         self.facilities = AVLTree()
         for f in facilities:
             self.facilities.insert(f.id, f)
+            
         # urgent heap
         self.urgent = PriorityQueue()
         for b in bins:
             self.urgent.push(b)
+            
         # hash map for fast lookup
         self.bin_map = HashMap()
         for b in bins:
@@ -70,8 +73,9 @@ class CityManager:
         for b in self.bins_list:
             self.urgent.push(b)
 
-    def top_urgent(self, k=5):
-        return self.urgent.top_k(k)
+    def get_urgent_bins(self, threshold=80):
+        # Return bins with fill level >= threshold, sorted by fill level (desc)
+        return sorted([b for b in self.bins_list if b.fill_level >= threshold], key=lambda x: x.fill_level, reverse=True)
 
     def sorted_facilities(self):
         # return facilities sorted by capacity ascending
