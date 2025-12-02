@@ -11,6 +11,7 @@ from models import get_iso_timestamp
 
 class CityManager:
     def __init__(self, bins, facilities):
+
         # bins: list of Bin objects
         self.bins_list = LinkedList()
         for b in bins:
@@ -30,12 +31,14 @@ class CityManager:
         self.bin_map = HashMap()
         for b in bins:
             self.bin_map.set(b.id, b)
+
         # graph (nodes = bins + facilities)
         self.graph = Graph()
         for b in bins:
             self.graph.add_node(b.id, b.lat, b.lon)
         for f in facilities:
             self.graph.add_node(f.id, f.lat, f.lon)
+
         # create edges between nearby nodes (k-nearest or radius)
         self._connect_nodes(radius_km=0.05)
         # queue & stack
@@ -50,7 +53,7 @@ class CityManager:
             id_i, pos_i = nodes[i]
             for j in range(i+1, len(nodes)):
                 id_j, pos_j = nodes[j]
-                # simple euclidean distance in degrees (approx ok for small area)
+                # simple euclidean distance in degrees
                 dx = pos_i[0] - pos_j[0]
                 dy = pos_i[1] - pos_j[1]
                 dist = (dx*dx + dy*dy)**0.5

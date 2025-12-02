@@ -6,6 +6,8 @@ import storage
 import routing
 from structures.avl_tree import AVLTree
 from structures.graph import Graph
+from structures.hash_map import HashMap
+from structures.linked_list import LinkedList
 
 # ---------- State & Data ----------
 bins = storage.load_bins()
@@ -13,6 +15,11 @@ requests = storage.load_requests()
 history = storage.load_history()
 facilities = storage.load_facilities()
 request_stack = deque()
+
+# HashMap for fast Bin Lookup (Key: Bin ID)
+bins_map = HashMap()
+for b in bins:
+    bins_map.set(b.id, b)
 
 # AVL Tree for Facility Lookup (Key: Facility ID)
 facilities_avl = AVLTree()
@@ -27,7 +34,9 @@ if not bins:
         b_lat = 25.2048 + random.uniform(-0.04, 0.04)
         b_lon = 55.2708 + random.uniform(-0.04, 0.04)
         b_fill = random.randint(0, 95)
-        bins.append(models.Bin(id=b_id, waste_type=b_type, lat=b_lat, lon=b_lon, fill_level=b_fill))
+        new_bin = models.Bin(id=b_id, waste_type=b_type, lat=b_lat, lon=b_lon, fill_level=b_fill)
+        bins.append(new_bin)
+        bins_map.set(b_id, new_bin)
     storage.save_bins(bins)
 
 # seed facilities if empty

@@ -5,6 +5,7 @@ from .components import create_stat_card
 from .charts import get_bin_status_chart_options, get_waste_composition_chart_options
 
 
+# Calculate dashboard statistics
 def get_stats(bins, history, requests):
     """Calculate dashboard statistics."""
     total_collections = len([h for h in history if h.get('status') == 'Collected'])
@@ -14,6 +15,7 @@ def get_stats(bins, history, requests):
     return total_collections, co2_saved, urgent_count, pending_count
 
 
+# Undo a specific collection from history
 def undo_specific_history(entry, bins, history, save_all, refresh_ui):
     """Undo a specific history record."""
     b = next((x for x in bins if x.id == entry["bin_id"]), None)
@@ -31,12 +33,13 @@ def undo_specific_history(entry, bins, history, save_all, refresh_ui):
 
 from .tables import DASHBOARD_URGENT_COLUMNS, DASHBOARD_URGENT_ACTIONS_SLOT
 
+# Render the urgent bins table with dispatch actions
 def render_urgent_bins_table(bins, collect_urgent_action, dispatch_bin_logic):
     """Render the table of urgent bins."""
     with ui.card().classes("flex-1 p-0 shadow-sm"):
         with ui.row().classes("p-4 border-b w-full items-center"):
             ui.label("Critical / Urgent Bins").classes("text-lg font-semibold")
-            ui.button("Collect All", on_click=collect_urgent_action).classes("ml-auto bg-red-500 text-white")
+            ui.button("Collect Urgent", on_click=collect_urgent_action).classes("ml-auto bg-red-500 text-white")
         urgent_bins = [b for b in bins if b.fill_level >= 80]
         
         # Create DataFrame for urgent bins
@@ -56,6 +59,7 @@ def render_urgent_bins_table(bins, collect_urgent_action, dispatch_bin_logic):
             ui.label("No critical bins at the moment").classes("p-4 text-gray-500")
 
 
+# Render recent collection history
 def render_recent_collections(history):
     """Render the list of recent collections."""
     with ui.card().classes("w-1/3 p-4 shadow-md rounded-xl"):
@@ -78,6 +82,7 @@ def render_recent_collections(history):
             ui.label("No recent collections").classes("text-sm text-gray-500")
 
 
+# Main dashboard rendering function
 def render_dashboard(bins, history, requests, collect_urgent_action, dispatch_bin_logic, save_all, refresh_ui):
     """Render the dashboard view."""
     tc, co2, uc, pc = get_stats(bins, history, requests)

@@ -37,7 +37,6 @@ def render_dispatch(bins, facilities, road_graph):
     
     def update_view():
         map_container.clear()
-
         
         # Path calculation for map (if needed)
         path = []

@@ -6,6 +6,7 @@ from algorithms.sorting import merge_sort
 from .tables import HISTORY_DISPATCH_COLUMNS, HISTORY_UPDATE_COLUMNS, HISTORY_REQUEST_COLUMNS
 
 
+# Create filter inputs for history views
 def create_history_filters(sort_options=None):
     """Create filter inputs for history views."""
     if sort_options is None:
@@ -21,14 +22,121 @@ def create_history_filters(sort_options=None):
     return search, area, type_filter, sort_by
 
 
+# Generic function to render a history tab with filtering and sorting
+def render_history_tab(
+    history,
+    columns,
+    filter_status,
+    sort_options,
+    enrich_fn=None,
+    metrics_container=None,
+    metrics_fn=None
+):
+    """
+    Generic function to render a history tab.
+    
+    Args:
+        history: Full history data
+        columns: Table column definitions
+        filter_status: Status value(s) to filter by (string or list)
+        sort_options: List of sort options for dropdown
+        enrich_fn: Optional function to enrich data (e.g., add distance/CO2)
+        metrics_container: Optional container for metrics display
+        metrics_fn: Optional function to calculate and display metrics
+    """
+    with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
+        # Create filters
+        search, area, type_filter, sort_by = create_history_filters(sort_options)
+        
+        # Table container
+        table_container = ui.column().classes("w-full")
+        
+        def refresh_table():
+            table_container.clear()
+            if metrics_container:
+                metrics_container.clear()
+            
+            query = search.value.strip()
+            area_query = area.value.strip()
+            type_val = type_filter.value
+            sort_val = sort_by.value
+            
+            # Filter by status
+            if isinstance(filter_status, list):
+                filtered = [h for h in history if h.get('status') in filter_status]
+            else:
+                filtered = [h for h in history if h.get('status') == filter_status]
+            
+            # Filter by type
+            if type_val != "All":
+                filtered = [h for h in filtered if h.get('type') == type_val]
+            
+            # Filter by area
+            if area_query:
+                filtered = search_by_substring(filtered, lambda h: h.get("area", ""), area_query)
+            
+            # Enrich data if function provided
+            if enrich_fn:
+                filtered = enrich_fn(filtered)
+            
+            # Search by bin ID
+            if query:
+                filtered = search_by_substring(filtered, lambda h: h.get("bin_id", ""), query)
+            
+            # Sort data
+            if sort_val == "Recent First":
+                filtered.reverse()
+            elif sort_val == "Bin ID":
+                filtered = merge_sort(filtered, key=lambda h: h.get("bin_id", ""))
+            elif sort_val == "Distance":
+                filtered = merge_sort(filtered, key=lambda h: h.get("distance", 0))
+                filtered.reverse()
+            elif sort_val == "CO2 Saved":
+                filtered = merge_sort(filtered, key=lambda h: h.get("co2", 0))
+                filtered.reverse()
+            
+            # Display metrics if function provided
+            if metrics_fn and metrics_container:
+                metrics_fn(filtered, metrics_container)
+            
+            # Prepare table data
+            df = pd.DataFrame(filtered) if filtered else pd.DataFrame()
+            if not df.empty and enrich_fn:
+                # Format numeric columns
+                if 'distance' in df.columns:
+                    df['distance'] = df['distance'].apply(lambda x: f"{x:.2f}")
+                if 'co2' in df.columns:
+                    df['co2'] = df['co2'].apply(lambda x: f"{x:.2f}")
+            
+            rows = df.to_dict('records') if not df.empty else []
+            
+            # Render table
+            with table_container:
+                ui.table(
+                    columns=columns,
+                    rows=rows,
+                    pagination=10
+                ).classes("w-full").props('flat bordered dense separator="cell"')
+        
+        # Attach event handlers
+        search.on_value_change(refresh_table)
+        area.on_value_change(refresh_table)
+        type_filter.on_value_change(refresh_table)
+        sort_by.on_value_change(refresh_table)
+        
+        # Initial render
+        refresh_table()
+
+
+# Main history view rendering function
 def render_history(history, get_distance_to_depot_fn):
     """Render the history view."""
     ui.label("Collection History").classes("text-2xl font-bold mb-4")
     
-    # Metrics container (above tabs)
-    d_metrics = ui.row().classes("w-full gap-4 mb-4")
+    # Metrics container for dispatch tab
+    dispatch_metrics = ui.row().classes("w-full gap-4 mb-4")
 
-    # Create tabs for different history types
+    # Create tabs
     with ui.tabs().classes("w-full").props("align=justify") as tabs:
         tab_dispatch = ui.tab("Dispatch History")
         tab_update = ui.tab("Update Bin History")
@@ -37,36 +145,10 @@ def render_history(history, get_distance_to_depot_fn):
     with ui.tab_panels(tabs, value=tab_dispatch).classes("w-full bg-transparent"):
         # Dispatch History Tab
         with ui.tab_panel(tab_dispatch).classes("p-0"):
-            with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
-                d_search, d_area, d_type, d_sort = create_history_filters(
-                    sort_options=["Recent First", "Bin ID", "Distance", "CO2 Saved"]
-                )
-                
-                d_table = ui.column().classes("w-full")
-            
-            def refresh_dispatch_history():
-                d_table.clear()
-                d_metrics.clear()
-                
-                query = d_search.value.strip()
-                area_query = d_area.value.strip()
-                type_filter = d_type.value
-                sort_by = d_sort.value
-                
-                # Filter only dispatched items from history
-                dispatch_history = [h for h in history if h.get('status') == 'Collected']
-
-                # Filter by Type
-                if type_filter != "All":
-                    dispatch_history = [h for h in dispatch_history if h.get('type') == type_filter]
-
-                # Filter by Area
-                if area_query:
-                    dispatch_history = search_by_substring(dispatch_history, lambda h: h.get("area", ""), area_query)
-                
-                # Enrich with distance and CO2
+            def enrich_dispatch(data):
+                """Enrich dispatch data with distance and CO2."""
                 enriched = []
-                for h in dispatch_history:
+                for h in data:
                     dist = 0.0
                     if "area" in h:
                         try:
@@ -75,29 +157,15 @@ def render_history(history, get_distance_to_depot_fn):
                         except:
                             dist = 0.0
                     enriched.append({**h, "distance": dist, "co2": 2.5})
+                return enriched
+            
+            def display_dispatch_metrics(data, container):
+                """Display metrics for dispatch history."""
+                total = len(data)
+                total_dist = sum(h.get("distance", 0) for h in data)
+                total_co2 = sum(h.get("co2", 0) for h in data)
                 
-                # Search using DSA
-                if query:
-                    enriched = search_by_substring(enriched, lambda h: h.get("bin_id", ""), query)
-                
-                # Sort using merge_sort
-                if sort_by == "Recent First":
-                    enriched.reverse()
-                elif sort_by == "Bin ID":
-                    enriched = merge_sort(enriched, key=lambda h: h["bin_id"])
-                elif sort_by == "Distance":
-                    enriched = merge_sort(enriched, key=lambda h: h["distance"])
-                    enriched.reverse()
-                elif sort_by == "CO2 Saved":
-                    enriched = merge_sort(enriched, key=lambda h: h["co2"])
-                    enriched.reverse()
-                
-                # Metrics
-                total = len(enriched)
-                total_dist = sum(h["distance"] for h in enriched)
-                total_co2 = sum(h["co2"] for h in enriched)
-                
-                with d_metrics:
+                with container:
                     with ui.card().classes("flex-1 p-3 bg-blue-50"):
                         ui.label("Total Dispatches").classes("text-xs text-gray-500")
                         ui.label(str(total)).classes("text-xl font-bold")
@@ -107,107 +175,31 @@ def render_history(history, get_distance_to_depot_fn):
                     with ui.card().classes("flex-1 p-3 bg-teal-50"):
                         ui.label("CO2 Saved").classes("text-xs text-gray-500")
                         ui.label(f"{total_co2:.2f} kg").classes("text-xl font-bold")
-                
-                # Format for display
-                df = pd.DataFrame(enriched) if enriched else pd.DataFrame()
-                if not df.empty:
-                    df['distance'] = df['distance'].apply(lambda x: f"{x:.2f}")
-                    df['co2'] = df['co2'].apply(lambda x: f"{x:.2f}")
-                    rows = df.to_dict('records')
-                else:
-                    rows = []
-                
-                with d_table:
-                    ui.table(
-                        columns=HISTORY_DISPATCH_COLUMNS,
-                        rows=rows,
-                        pagination=10
-                    ).classes("w-full").props('flat bordered dense separator="cell"')
-
-            d_search.on_value_change(refresh_dispatch_history)
-            d_area.on_value_change(refresh_dispatch_history)
-            d_type.on_value_change(refresh_dispatch_history)
-            d_sort.on_value_change(refresh_dispatch_history)
-            refresh_dispatch_history()
+            
+            render_history_tab(
+                history=history,
+                columns=HISTORY_DISPATCH_COLUMNS,
+                filter_status="Collected",
+                sort_options=["Recent First", "Bin ID", "Distance", "CO2 Saved"],
+                enrich_fn=enrich_dispatch,
+                metrics_container=dispatch_metrics,
+                metrics_fn=display_dispatch_metrics
+            )
 
         # Update Bin History Tab
         with ui.tab_panel(tab_update).classes("p-0"):
-            with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
-                u_search, u_area, u_type, u_sort = create_history_filters()
-                u_table = ui.column().classes("w-full")
-            
-            def refresh_update_history():
-                u_table.clear()
-                query = u_search.value.strip()
-                type_filter = u_type.value
-                sort_by = u_sort.value
-                
-                # Filter updates
-                updates = [h for h in history if h.get('status') in ['Updated', 'IoT Update']]
-                
-                if type_filter != "All":
-                    updates = [h for h in updates if h.get('type') == type_filter]
-                
-                if query:
-                    updates = search_by_substring(updates, lambda h: h.get("bin_id", ""), query)
-                    
-                if sort_by == "Recent First":
-                    updates.reverse()
-                elif sort_by == "Bin ID":
-                    updates = merge_sort(updates, key=lambda h: h["bin_id"])
-                
-                df = pd.DataFrame(updates) if updates else pd.DataFrame()
-                rows = df.to_dict('records') if not df.empty else []
-                
-                with u_table:
-                    ui.table(
-                        columns=HISTORY_UPDATE_COLUMNS,
-                        rows=rows,
-                        pagination=10
-                    ).classes("w-full").props('flat bordered dense separator="cell"')
-
-            u_search.on_value_change(refresh_update_history)
-            u_type.on_value_change(refresh_update_history)
-            u_sort.on_value_change(refresh_update_history)
-            refresh_update_history()
+            render_history_tab(
+                history=history,
+                columns=HISTORY_UPDATE_COLUMNS,
+                filter_status=["Updated", "IoT Update"],
+                sort_options=["Recent First", "Bin ID"]
+            )
 
         # Request History Tab
         with ui.tab_panel(tab_request).classes("p-0"):
-            with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
-                r_search, r_area, r_type, r_sort = create_history_filters()
-                r_table = ui.column().classes("w-full")
-            
-            def refresh_request_history():
-                r_table.clear()
-                query = r_search.value.strip()
-                type_filter = r_type.value
-                sort_by = r_sort.value
-                
-                # Filter requests
-                req_history = [h for h in history if h.get('status') == 'Request Processed']
-                
-                if type_filter != "All":
-                    req_history = [h for h in req_history if h.get('type') == type_filter]
-                
-                if query:
-                    req_history = search_by_substring(req_history, lambda h: h.get("bin_id", ""), query)
-                    
-                if sort_by == "Recent First":
-                    req_history.reverse()
-                elif sort_by == "Bin ID":
-                    req_history = merge_sort(req_history, key=lambda h: h["bin_id"])
-                
-                df = pd.DataFrame(req_history) if req_history else pd.DataFrame()
-                rows = df.to_dict('records') if not df.empty else []
-                
-                with r_table:
-                    ui.table(
-                        columns=HISTORY_REQUEST_COLUMNS,
-                        rows=rows,
-                        pagination=10
-                    ).classes("w-full").props('flat bordered dense separator="cell"')
-
-            r_search.on_value_change(refresh_request_history)
-            r_type.on_value_change(refresh_request_history)
-            r_sort.on_value_change(refresh_request_history)
-            refresh_request_history()
+            render_history_tab(
+                history=history,
+                columns=HISTORY_REQUEST_COLUMNS,
+                filter_status="Request Processed",
+                sort_options=["Recent First", "Bin ID"]
+            )

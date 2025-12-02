@@ -9,9 +9,9 @@ def process_specific_request(bin_id, save_all, dispatch_bin_logic, refresh_ui):
     for i, r in enumerate(state.requests):
         if r.bin_id == bin_id:
             req = state.requests.pop(i)
-            state.request_stack.append(("request_add", req))
+            state.request_stack.append(("request_approve", req))
             save_all()
-            dispatch_bin_logic(bin_id)
+            dispatch_bin_logic(bin_id, skip_undo=True)
             ui.notify(f"Processed request for {bin_id}", color="positive")
             refresh_ui()
             return
@@ -22,6 +22,7 @@ def reject_specific_request(bin_id, save_all, refresh_ui):
     for i, r in enumerate(state.requests):
         if r.bin_id == bin_id:
             req = state.requests.pop(i)
+            state.request_stack.append(("request_reject", req))
             save_all()
             ui.notify(f"Rejected request for {bin_id}", color="info")
             refresh_ui()
@@ -51,29 +52,38 @@ def render_requests(process_request_action, process_specific_request_fn, reject_
             ui.label("Processed").classes("text-sm text-gray-600 mb-1")
             ui.label(str(processed_requests)).classes("text-3xl font-bold text-green-600")
     
-    # Main requests card
+    # Main requests card with dynamic table
     with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
         with ui.row().classes("w-full justify-between items-center mb-4"):
             ui.label("Request Queue").classes("text-xl font-bold text-gray-800")
             if state.requests:
                 ui.label(f"{len(state.requests)} requests").classes("text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full")
         
-        if state.requests:
-            df_requests = pd.DataFrame([r.to_dict() for r in state.requests])
-            
-            table = ui.table(
-                columns=REQUESTS_COLUMNS,
-                rows=df_requests.to_dict('records'),
-                pagination=10
-            ).classes("w-full").props('flat bordered dense separator="cell"')
-            
-            table.add_slot('body-cell-status', REQUESTS_STATUS_SLOT)
-            table.add_slot('body-cell-actions', REQUESTS_ACTIONS_SLOT)
-            
-            table.on('approve', lambda e: process_specific_request_fn(e.args['bin_id']))
-            table.on('reject', lambda e: reject_specific_request_fn(e.args['bin_id']))
-        else:
-            with ui.column().classes("w-full items-center py-12"):
-                ui.icon("inbox", size="64px").classes("text-gray-300 mb-4")
-                ui.label("No pending requests").classes("text-xl font-semibold text-gray-600 mb-2")
-                ui.label("All collection requests have been processed").classes("text-sm text-gray-500")
+        # Dynamic table container
+        table_container = ui.column().classes("w-full")
+        
+        def refresh_table():
+            table_container.clear()
+            with table_container:
+                if state.requests:
+                    df_requests = pd.DataFrame([r.to_dict() for r in state.requests])
+                    
+                    table = ui.table(
+                        columns=REQUESTS_COLUMNS,
+                        rows=df_requests.to_dict('records'),
+                        pagination=10
+                    ).classes("w-full").props('flat bordered dense separator="cell"')
+                    
+                    table.add_slot('body-cell-status', REQUESTS_STATUS_SLOT)
+                    table.add_slot('body-cell-actions', REQUESTS_ACTIONS_SLOT)
+                    
+                    table.on('approve', lambda e: process_specific_request_fn(e.args['bin_id']))
+                    table.on('reject', lambda e: reject_specific_request_fn(e.args['bin_id']))
+                else:
+                    with ui.column().classes("w-full items-center py-12"):
+                        ui.icon("inbox", size="64px").classes("text-gray-300 mb-4")
+                        ui.label("No pending requests").classes("text-xl font-semibold text-gray-600 mb-2")
+                        ui.label("All collection requests have been processed").classes("text-sm text-gray-500")
+        
+        # Initial render
+        refresh_table()
