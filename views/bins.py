@@ -3,6 +3,7 @@ from nicegui import ui
 import pandas as pd
 from algorithms.sorting import merge_sort
 from algorithms.searching import search_by_substring
+from .tables import BINS_COLUMNS, BINS_FILL_SLOT, BINS_STATUS_SLOT, BINS_ACTIONS_SLOT
 
 
 def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, dispatch_bin_logic, simulate_updates_action, collect_urgent_action):
@@ -90,61 +91,19 @@ def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, disp
             with table_container:
                 if rows:
                     table = ui.table(
-                        columns=[
-                            {"name": "id", "label": "Bin ID", "field": "id", "align": "left", "sortable": True},
-                            {"name": "type", "label": "Waste Type", "field": "waste_type", "align": "left", "sortable": True},
-                            {"name": "loc", "label": "Location", "field": "location", "align": "left"},
-                            {"name": "fill", "label": "Fill Level", "field": "fill_level", "align": "center", "sortable": True},
-                            {"name": "status", "label": "Status", "field": "status", "align": "center"},
-                            {"name": "actions", "label": "Actions", "field": "actions", "align": "center"}
-                        ],
+                        columns=BINS_COLUMNS,
                         rows=rows,
                         pagination=10
                     ).classes("w-full").props('flat bordered dense separator="cell"')
                     
                     # Fill level progress bar
-                    table.add_slot('body-cell-fill', r'''
-                        <q-td :props="props">
-                            <div class="flex items-center justify-center gap-2">
-                                <q-linear-progress 
-                                    :value="props.value / 100" 
-                                    :color="props.value >= 80 ? 'red' : props.value >= 50 ? 'orange' : props.value >= 25 ? 'blue' : 'green'" 
-                                    track-color="grey-3" 
-                                    class="w-28" 
-                                    size="8px"
-                                    rounded
-                                />
-                                <span class="text-sm font-semibold">{{ props.value }}%</span>
-                            </div>
-                        </q-td>
-                    ''')
+                    table.add_slot('body-cell-fill', BINS_FILL_SLOT)
                     
                     # Status badge
-                    table.add_slot('body-cell-status', r'''
-                        <q-td :props="props">
-                            <q-badge 
-                                :color="props.value === 'Critical' ? 'red' : 
-                                       props.value === 'High' ? 'orange' : 
-                                       props.value === 'Medium' ? 'blue' : 
-                                       props.value === 'Low' ? 'green' : 'grey'"
-                                :label="props.value"
-                                class="px-3 py-1"
-                                style="min-width: 70px; display: inline-block; text-align: center;"
-                            />
-                        </q-td>
-                    ''')
+                    table.add_slot('body-cell-status', BINS_STATUS_SLOT)
                     
                     # Action buttons
-                    table.add_slot('body-cell-actions', r'''
-                        <q-td :props="props">
-                            <q-btn 
-                                size="sm" 
-                                label="Dispatch"
-                                color="primary"
-                                @click="$parent.$emit('dispatch', props.row)"
-                            />
-                        </q-td>
-                    ''')
+                    table.add_slot('body-cell-actions', BINS_ACTIONS_SLOT)
                     
                     table.on('dispatch', lambda e: dispatch_bin_logic(e.args['id']))
                 else:

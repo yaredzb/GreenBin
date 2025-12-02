@@ -3,6 +3,7 @@ from nicegui import ui
 import pandas as pd
 from algorithms.searching import search_by_substring
 from algorithms.sorting import merge_sort
+from .tables import HISTORY_DISPATCH_COLUMNS, HISTORY_UPDATE_COLUMNS, HISTORY_REQUEST_COLUMNS
 
 
 def create_history_filters(sort_options=None):
@@ -118,13 +119,7 @@ def render_history(history, get_distance_to_depot_fn):
                 
                 with d_table:
                     ui.table(
-                        columns=[
-                            {"name":"bin_id","label":"Bin ID","field":"bin_id", "align": "left"},
-                            {"name":"type","label":"Type","field":"type", "align": "left"},
-                            {"name":"dist","label":"Distance (km)","field":"distance", "align": "left"},
-                            {"name":"co2","label":"CO2 (kg)","field":"co2", "align": "left"},
-                            {"name":"time","label":"Time","field":"timestamp", "align": "left"},
-                        ],
+                        columns=HISTORY_DISPATCH_COLUMNS,
                         rows=rows,
                         pagination=10
                     ).classes("w-full").props('flat bordered dense separator="cell"')
@@ -166,13 +161,7 @@ def render_history(history, get_distance_to_depot_fn):
                 
                 with u_table:
                     ui.table(
-                        columns=[
-                            {"name":"bin_id","label":"Bin ID","field":"bin_id", "align": "left"},
-                            {"name":"type","label":"Type","field":"type,", "align": "left"},
-                            {"name":"prev","label":"Prev Fill","field":"prev_fill", "align": "left"},
-                            {"name":"new","label":"New Fill","field":"new_fill", "align": "left"},
-                            {"name":"time","label":"Time","field":"timestamp", "align": "left"},
-                        ],
+                        columns=HISTORY_UPDATE_COLUMNS,
                         rows=rows,
                         pagination=10
                     ).classes("w-full").props('flat bordered dense separator="cell"')
@@ -213,12 +202,7 @@ def render_history(history, get_distance_to_depot_fn):
                 
                 with r_table:
                     ui.table(
-                        columns=[
-                            {"name":"bin_id","label":"Bin ID","field":"bin_id", "align": "left"},
-                            {"name":"type","label":"Type","field":"type", "align": "left"},
-                            {"name":"action","label":"Action","field":"action", "align": "left"},
-                            {"name":"time","label":"Time","field":"timestamp", "align": "left"},
-                        ],
+                        columns=HISTORY_REQUEST_COLUMNS,
                         rows=rows,
                         pagination=10
                     ).classes("w-full").props('flat bordered dense separator="cell"')

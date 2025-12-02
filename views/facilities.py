@@ -3,8 +3,9 @@ from nicegui import ui
 import pandas as pd
 from algorithms.sorting import merge_sort
 from views.components import create_stat_card
-from views.components import create_stat_card
 import services.report_generator as report_gen
+from .charts import get_capacity_efficiency_scatter_options
+from .tables import FACILITIES_COLUMNS, FACILITIES_EFFICIENCY_SLOT
 
 def render_facility_report(facilities, facilities_avl, bins, history):
     """Render the facility performance report."""
@@ -30,105 +31,13 @@ def render_facility_report(facilities, facilities_avl, bins, history):
             create_stat_card("Top Performer", top_f.id, f"{top_f.efficiency}% efficiency", border_color="#F59E0B")
 
 
-
-    def capacity_efficiency_scatter(facilities):
-        """Scatter plot showing capacity vs efficiency relationship."""
-        
+    # Render Charts
+    with ui.row().classes("w-full mb-6"):
         with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white h-full"):
             with ui.row().classes("w-full justify-between items-center mb-4"):
                 ui.label("Capacity vs Efficiency Analysis").classes("text-xl font-bold text-gray-800")
             
-            # Prepare data: [capacity, efficiency, facility_id]
-            scatter_data = []
-            for f in facilities:
-                # Color based on efficiency
-                if f.efficiency > 90:
-                    color = "#10B981"
-                elif f.efficiency >= 70:
-                    color = "#F59E0B"
-                else:
-                    color = "#EF4444"
-                
-                scatter_data.append({
-                    "value": [f.capacity, f.efficiency],
-                    "name": f.id,
-                    "itemStyle": {"color": color}
-                })
-            
-            ui.echart({
-                "tooltip": {
-                    "trigger": "item",
-                    "formatter": "{b}<br/>Capacity: {c0}<br/>Efficiency: {c1}%",
-                    "backgroundColor": "rgba(255, 255, 255, 0.95)",
-                    "borderColor": "#e5e7eb",
-                    "textStyle": {"color": "#374151"}
-                },
-                "grid": {
-                    "left": "10%",
-                    "right": "10%",
-                    "bottom": "15%",
-                    "top": "15%",
-                    "containLabel": True
-                },
-                "xAxis": {
-                    "type": "value",
-                    "name": "Capacity",
-                    "nameLocation": "middle",
-                    "nameGap": 30,
-                    "nameTextStyle": {
-                        "fontSize": 12,
-                        "fontWeight": "bold",
-                        "color": "#374151"
-                    },
-                    "axisLabel": {
-                        "color": "#6b7280",
-                        "fontSize": 11
-                    },
-                    "splitLine": {"lineStyle": {"color": "#f3f4f6", "type": "dashed"}}
-                },
-                "yAxis": {
-                    "type": "value",
-                    "name": "Efficiency (%)",
-                    "nameLocation": "middle",
-                    "nameGap": 40,
-                    "nameTextStyle": {
-                        "fontSize": 12,
-                        "fontWeight": "bold",
-                        "color": "#374151"
-                    },
-                    "max": 100,
-                    "axisLabel": {
-                        "formatter": "{value}%",
-                        "color": "#6b7280",
-                        "fontSize": 11
-                    },
-                    "splitLine": {"lineStyle": {"color": "#f3f4f6", "type": "dashed"}}
-                },
-                "series": [{
-                    "type": "scatter",
-                    "symbolSize": 15,
-                    "data": scatter_data,
-                    "emphasis": {
-                        "itemStyle": {
-                            "shadowBlur": 10,
-                            "shadowColor": "rgba(0, 0, 0, 0.3)"
-                        },
-                        "scale": True,
-                        "scaleSize": 1.2
-                    },
-                    "label": {
-                        "show": True,
-                        "position": "top",
-                        "formatter": "{b}",
-                        "fontSize": 10,
-                        "color": "#374151"
-                    }
-                }]
-            }).classes("h-64")
-
-    # Render Charts
-    with ui.row().classes("w-full mb-6"):
-        capacity_efficiency_scatter(facilities)
+            ui.echart(get_capacity_efficiency_scatter_options(facilities)).classes("h-64")
 
     # Data table section
     with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):
@@ -187,29 +96,10 @@ def render_facility_report(facilities, facilities_avl, bins, history):
             with table_container:
                 if rows:
                     ui.table(
-                        columns=[
-                            {"name": "id", "label": "Facility ID", "field": "id", "align": "left", "sortable": True},
-                            {"name": "loc", "label": "Location", "field": "loc", "align": "left"},
-                            {"name": "cap", "label": "Capacity", "field": "cap", "align": "center", "sortable": True},
-                            {"name": "eff", "label": "Efficiency", "field": "eff_val", "align": "left", "sortable": True}
-                        ],
+                        columns=FACILITIES_COLUMNS,
                         rows=rows,
                         pagination=10
-                    ).classes("w-full").props('flat bordered dense separator="cell"').add_slot('body-cell-eff', r'''
-                        <q-td :props="props">
-                            <div class="flex items-center gap-2">
-                                <q-linear-progress 
-                                    :value="props.value / 100" 
-                                    :color="props.value > 90 ? 'green' : props.value >= 70 ? 'orange' : 'red'"
-                                    track-color="grey-3" 
-                                    class="w-32" 
-                                    size="8px"
-                                    rounded
-                                />
-                                <span class="text-sm font-semibold">{{ props.value }}%</span>
-                            </div>
-                        </q-td>
-                    ''')
+                    ).classes("w-full").props('flat bordered dense separator="cell"').add_slot('body-cell-eff', FACILITIES_EFFICIENCY_SLOT)
                 else:
                     ui.label("No facilities match your criteria").classes("text-gray-500 text-center py-8")
 

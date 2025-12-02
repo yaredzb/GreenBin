@@ -4,56 +4,56 @@
     "waste_type": "Industrial",
     "lat": 25.21396095568328,
     "lon": 55.2412431366312,
-    "fill_level": 74
+    "fill_level": 0
   },
   {
     "id": "102",
     "waste_type": "Organic",
     "lat": 25.23686904486762,
     "lon": 55.25557411178927,
-    "fill_level": 66
+    "fill_level": 68
   },
   {
     "id": "103",
     "waste_type": "Recyclable",
     "lat": 25.214694784939987,
     "lon": 55.27139428910113,
-    "fill_level": 88
+    "fill_level": 15
   },
   {
     "id": "104",
     "waste_type": "Household",
     "lat": 25.227678132390793,
     "lon": 55.27678619135921,
-    "fill_level": 70
+    "fill_level": 71
   },
   {
     "id": "105",
     "waste_type": "Organic",
     "lat": 25.222641505303642,
     "lon": 55.29533983046098,
-    "fill_level": 84
+    "fill_level": 14
   },
   {
     "id": "106",
     "waste_type": "Recyclable",
     "lat": 25.1659504768304,
     "lon": 55.29461274891572,
-    "fill_level": 58
+    "fill_level": 61
   },
   {
     "id": "107",
     "waste_type": "Industrial",
     "lat": 25.161559532359625,
     "lon": 55.22162760123073,
-    "fill_level": 65
+    "fill_level": 79
   },
   {
     "id": "108",
     "waste_type": "Industrial",
     "lat": 25.209059133418876,
     "lon": 55.29543529022558,
-    "fill_level": 74
+    "fill_level": 12
   },
   {
     "id": "109",
@@ -67,70 +67,70 @@
     "waste_type": "Industrial",
     "lat": 25.176504797333543,
     "lon": 55.26516222068677,
-    "fill_level": 83
+    "fill_level": 2
   },
   {
     "id": "111",
     "waste_type": "Recyclable",
     "lat": 25.247095996221745,
     "lon": 55.28862713282975,
-    "fill_level": 67
+    "fill_level": 68
   },
   {
     "id": "112",
     "waste_type": "Industrial",
     "lat": 25.20399623430595,
     "lon": 55.232367575637255,
-    "fill_level": 67
+    "fill_level": 72
   },
   {
     "id": "113",
     "waste_type": "Recyclable",
     "lat": 25.225133526758093,
     "lon": 55.270623672440436,
-    "fill_level": 65
+    "fill_level": 67
   },
   {
     "id": "114",
     "waste_type": "Industrial",
     "lat": 25.160445544005967,
     "lon": 55.311925901254,
-    "fill_level": 84
+    "fill_level": 92
   },
   {
     "id": "115",
     "waste_type": "Household",
     "lat": 25.172257368833932,
     "lon": 55.30190683785927,
-    "fill_level": 76
+    "fill_level": 77
   },
   {
     "id": "116",
     "waste_type": "Recyclable",
     "lat": 25.21022584114134,
     "lon": 55.2359536001161,
-    "fill_level": 87
+    "fill_level": 88
   },
   {
     "id": "117",
     "waste_type": "Household",
     "lat": 25.188082729070636,
     "lon": 55.249142606538,
-    "fill_level": 78
+    "fill_level": 88
   },
   {
     "id": "118",
     "waste_type": "Recyclable",
     "lat": 25.20978537054368,
     "lon": 55.23387146936985,
-    "fill_level": 90
+    "fill_level": 100
   },
   {
     "id": "119",
     "waste_type": "Organic",
     "lat": 25.151160580354205,
     "lon": 55.290024210411715,
-    "fill_level": 70
+    "fill_level": 80
   },
   {
     "id": "120",
@@ -144,6 +144,6 @@
     "waste_type": "Industrial",
     "lat": 35.2048,
     "lon": 55.2708,
-    "fill_level": 54
+    "fill_level": 56
   }
 ]

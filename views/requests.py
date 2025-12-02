@@ -2,7 +2,7 @@
 from nicegui import ui
 import pandas as pd
 import state
-
+from .tables import REQUESTS_COLUMNS, REQUESTS_STATUS_SLOT, REQUESTS_ACTIONS_SLOT
 
 def process_specific_request(bin_id, save_all, dispatch_bin_logic, refresh_ui):
     """Process a specific collection request."""
@@ -46,7 +46,6 @@ def render_requests(process_request_action, process_specific_request_fn, reject_
             ui.label(str(total_requests)).classes("text-3xl font-bold text-blue-600")
         with ui.card().classes("flex-1 p-4 shadow-sm"):
             ui.label("Urgent").classes("text-sm text-gray-600 mb-1")
-            # Assuming 'Pending' is the main status, but we can refine if we have urgent logic later
             ui.label(str(pending_requests)).classes("text-3xl font-bold text-orange-600")
         with ui.card().classes("flex-1 p-4 shadow-sm"):
             ui.label("Processed").classes("text-sm text-gray-600 mb-1")
@@ -63,57 +62,13 @@ def render_requests(process_request_action, process_specific_request_fn, reject_
             df_requests = pd.DataFrame([r.to_dict() for r in state.requests])
             
             table = ui.table(
-                columns=[
-                    {"name": "bin_id", "label": "Bin ID", "field": "bin_id", "align": "left", "sortable": True},
-                    {"name": "time", "label": "Requested At", "field": "timestamp", "align": "left", "sortable": True},
-
-                    {"name": "status", "label": "Status", "field": "status", "align": "center"},
-                    {"name": "actions", "label": "Actions", "field": "actions", "align": "center"}
-                ],
+                columns=REQUESTS_COLUMNS,
                 rows=df_requests.to_dict('records'),
                 pagination=10
             ).classes("w-full").props('flat bordered dense separator="cell"')
             
-            # Status badge
-            table.add_slot('body-cell-status', r'''
-                <q-td :props="props">
-                    <q-badge 
-                        :color="props.value === 'Pending' ? 'orange' : 
-                                props.value === 'Processing' ? 'blue' : 
-                                props.value === 'Completed' ? 'green' : 'grey'"
-                        :label="props.value"
-                        class="px-3 py-1"
-                    />
-                </q-td>
-            ''')
-            
-            # Action buttons with icons
-            table.add_slot('body-cell-actions', r'''
-                <q-td :props="props">
-                    <div class="flex gap-2 justify-center">
-                        <q-btn 
-                            size="sm" 
-                            flat
-                            dense
-                            icon="check_circle" 
-                            color="green"
-                            @click="$parent.$emit('approve', props.row)"
-                        >
-                            <q-tooltip>Approve request</q-tooltip>
-                        </q-btn>
-                        <q-btn 
-                            size="sm" 
-                            flat
-                            dense
-                            icon="cancel" 
-                            color="red"
-                            @click="$parent.$emit('reject', props.row)"
-                        >
-                            <q-tooltip>Reject request</q-tooltip>
-                        </q-btn>
-                    </div>
-                </q-td>
-            ''')
+            table.add_slot('body-cell-status', REQUESTS_STATUS_SLOT)
+            table.add_slot('body-cell-actions', REQUESTS_ACTIONS_SLOT)
             
             table.on('approve', lambda e: process_specific_request_fn(e.args['bin_id']))
             table.on('reject', lambda e: reject_specific_request_fn(e.args['bin_id']))
