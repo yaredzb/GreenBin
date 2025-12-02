@@ -13,6 +13,4 @@ env/
 .vscode/
 .idea/
 
-# Project Data (Generated/Local)
-data/
-*.json
+
