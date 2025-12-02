@@ -6,6 +6,7 @@ from structures.graph import Graph
 from structures.queue import Queue
 from structures.stack import Stack
 from algorithms.sorting import merge_sort
+from models import get_iso_timestamp
 
 
 class CityManager:
@@ -132,11 +133,10 @@ class CityManager:
         return path, coords
 
     def log_collection(self, bin_id):
-        import datetime
         bin_obj = self.get_bin(bin_id)
         if bin_obj:
             record = {
-                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "timestamp": get_iso_timestamp(),
                 "bin_id": bin_id,
                 "type": getattr(bin_obj, "waste_type", "General"),
                 "area": f"({bin_obj.lat:.2f}, {bin_obj.lon:.2f})", # Simplified area

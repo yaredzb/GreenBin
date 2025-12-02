@@ -21,10 +21,14 @@ class Bin:
     def from_dict(data):
         return Bin(**data)
 
+def get_iso_timestamp():
+    """Return current UTC timestamp in ISO 8601 format."""
+    return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')
+
 @dataclass
 class CollectionRequest:
     bin_id: str
-    timestamp: str = field(default_factory=lambda: datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    timestamp: str = field(default_factory=get_iso_timestamp)
     status: str = "Pending"
 
     def to_dict(self):

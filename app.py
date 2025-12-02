@@ -3,7 +3,7 @@ import asyncio
 from views import dashboard, bins as bins_view, requests as requests_view, history as history_view, dispatch as dispatch_view, facilities as facilities_view, predictions as predictions_view
 from views.components import create_stat_card
 from collections import deque
-import datetime
+
 import random
 import os
 import pandas as pd
@@ -21,7 +21,6 @@ from structures.min_heap import MinHeap
 
 import state
 
-# ---------- State & Data ----------
 # ---------- State & Data ----------
 # Imported from state.py: bins, requests, history, facilities, request_stack, facilities_avl, road_graph
 bins = state.bins
@@ -67,7 +66,7 @@ def dispatch_bin_logic(bin_id, silent=False, refresh=True):
     prev_fill = bin_obj.fill_level
     bin_obj.fill_level = 0
     record = {
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": models.get_iso_timestamp(),
         "bin_id": bin_id,
         "type": bin_obj.waste_type,
         "area": f"{bin_obj.lat:.4f},{bin_obj.lon:.4f}",
@@ -93,7 +92,7 @@ def request_collection_action(bin_id):
     # Log to history
     history.append({
         "bin_id": bin_id,
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": models.get_iso_timestamp(),
         "status": "Request Processed",
         "action": "Created",
         "type": next((b.waste_type for b in bins if b.id == bin_id), "Unknown")
@@ -111,7 +110,7 @@ def process_request_action():
     # Log to history
     history.append({
         "bin_id": req.bin_id,
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": models.get_iso_timestamp(),
         "status": "Request Processed",
         "action": "Processed",
         "type": next((b.waste_type for b in bins if b.id == req.bin_id), "Unknown")
@@ -261,7 +260,7 @@ def update_fill_action(bin_id, new_fill):
     # Log to history
     history.append({
         "bin_id": bin_id,
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": models.get_iso_timestamp(),
         "status": "Updated",
         "prev_fill": old_fill,
         "new_fill": new_fill,
@@ -283,7 +282,7 @@ def simulate_updates_action():
         if b.fill_level != old_fill:
             history.append({
                 "bin_id": b.id,
-                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "timestamp": models.get_iso_timestamp(),
                 "status": "IoT Update",
                 "prev_fill": old_fill,
                 "new_fill": b.fill_level,
