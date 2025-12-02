@@ -1,15 +1,3 @@
-import bisect
-
-
-def binary_search(arr, target_key, key=lambda x: x):
-    # arr must be sorted by key
-    keys = [key(x) for x in arr]
-    i = bisect.bisect_left(keys, target_key)
-    if i != len(arr) and keys[i] == target_key:
-        return arr[i]
-    return None
-
-
 def linear_search(items, predicate):
     """
     Linear search that returns all items matching a predicate function.
