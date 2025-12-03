@@ -122,12 +122,12 @@ BINS_COLUMNS = [
 
 BINS_FILL_SLOT = r'''
     <q-td :props="props">
-        <div class="flex items-center justify-center gap-2">
+        <div class="flex items-center gap-2">
             <q-linear-progress 
                 :value="props.value / 100" 
                 :color="props.value >= 80 ? 'red' : props.value >= 50 ? 'orange' : props.value >= 25 ? 'blue' : 'green'" 
                 track-color="grey-3" 
-                class="w-28" 
+                class="w-24" 
                 size="8px"
                 rounded
             />

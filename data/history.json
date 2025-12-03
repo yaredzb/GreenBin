@@ -7130,5 +7130,1726 @@
     "prev_fill": 56,
     "new_fill": 69,
     "type": "Industrial"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:42:21+00:00",
+    "status": "Request Processed",
+    "action": "Processed",
+    "type": "Industrial"
+  },
+  {
+    "timestamp": "2025-12-03T07:42:21+00:00",
+    "bin_id": "108",
+    "type": "Industrial",
+    "area": "25.2250,55.2900",
+    "status": "Collected",
+    "prev_fill": 75,
+    "source": "request"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:42:31+00:00",
+    "status": "Request Processed",
+    "action": "Processed",
+    "type": "Household"
+  },
+  {
+    "timestamp": "2025-12-03T07:42:31+00:00",
+    "bin_id": "101",
+    "type": "Household",
+    "area": "25.2048,55.2708",
+    "status": "Collected",
+    "prev_fill": 0,
+    "source": "request"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:43:00+00:00",
+    "status": "Updated",
+    "prev_fill": 0,
+    "new_fill": 98,
+    "type": "Household"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:11+00:00",
+    "bin_id": "115",
+    "type": "Organic",
+    "area": "25.1700,55.2350",
+    "status": "Collected",
+    "prev_fill": 95,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:13+00:00",
+    "bin_id": "104",
+    "type": "Industrial",
+    "area": "25.2150,55.2800",
+    "status": "Collected",
+    "prev_fill": 90,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:16+00:00",
+    "bin_id": "111",
+    "type": "Organic",
+    "area": "25.1800,55.2450",
+    "status": "Collected",
+    "prev_fill": 85,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:18+00:00",
+    "bin_id": "102",
+    "type": "Recyclable",
+    "area": "25.2090,55.2750",
+    "status": "Collected",
+    "prev_fill": 80,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:21+00:00",
+    "bin_id": "117",
+    "type": "Household",
+    "area": "25.1650,55.2300",
+    "status": "Collected",
+    "prev_fill": 70,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:23+00:00",
+    "bin_id": "119",
+    "type": "Organic",
+    "area": "25.1600,55.2250",
+    "status": "Collected",
+    "prev_fill": 65,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:26+00:00",
+    "bin_id": "106",
+    "type": "Recyclable",
+    "area": "25.2200,55.2850",
+    "status": "Collected",
+    "prev_fill": 60,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:29+00:00",
+    "bin_id": "113",
+    "type": "Household",
+    "area": "25.1750,55.2400",
+    "status": "Collected",
+    "prev_fill": 55,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:31+00:00",
+    "bin_id": "109",
+    "type": "Household",
+    "area": "25.1850,55.2500",
+    "status": "Collected",
+    "prev_fill": 50,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:34+00:00",
+    "bin_id": "121",
+    "type": "Household",
+    "area": "25.1550,55.2200",
+    "status": "Collected",
+    "prev_fill": 50,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:36+00:00",
+    "bin_id": "101",
+    "type": "Household",
+    "area": "25.2048,55.2708",
+    "status": "Collected",
+    "prev_fill": 0,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:39+00:00",
+    "bin_id": "112",
+    "type": "Industrial",
+    "area": "25.2350,55.3000",
+    "status": "Collected",
+    "prev_fill": 40,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:41+00:00",
+    "bin_id": "120",
+    "type": "Industrial",
+    "area": "25.2550,55.3200",
+    "status": "Collected",
+    "prev_fill": 35,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:44+00:00",
+    "bin_id": "105",
+    "type": "Household",
+    "area": "25.1950,55.2600",
+    "status": "Collected",
+    "prev_fill": 30,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:46+00:00",
+    "bin_id": "116",
+    "type": "Industrial",
+    "area": "25.2450,55.3100",
+    "status": "Collected",
+    "prev_fill": 25,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:49+00:00",
+    "bin_id": "110",
+    "type": "Recyclable",
+    "area": "25.2300,55.2950",
+    "status": "Collected",
+    "prev_fill": 20,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:52+00:00",
+    "bin_id": "103",
+    "type": "Organic",
+    "area": "25.2000,55.2650",
+    "status": "Collected",
+    "prev_fill": 15,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:54+00:00",
+    "bin_id": "107",
+    "type": "Organic",
+    "area": "25.1900,55.2550",
+    "status": "Collected",
+    "prev_fill": 10,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:57+00:00",
+    "bin_id": "114",
+    "type": "Recyclable",
+    "area": "25.2400,55.3050",
+    "status": "Collected",
+    "prev_fill": 10,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:43:59+00:00",
+    "bin_id": "118",
+    "type": "Recyclable",
+    "area": "25.2500,55.3150",
+    "status": "Collected",
+    "prev_fill": 5,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:46:08+00:00",
+    "bin_id": "101",
+    "type": "Household",
+    "area": "25.2048,55.2708",
+    "status": "Collected",
+    "prev_fill": 0,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T07:50:50+00:00",
+    "bin_id": "101",
+    "type": "Household",
+    "area": "25.2048,55.2708",
+    "status": "Collected",
+    "prev_fill": 45,
+    "source": "request"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:17+00:00",
+    "status": "Updated",
+    "prev_fill": 0,
+    "new_fill": 39,
+    "type": "Household"
+  },
+  {
+    "timestamp": "2025-12-03T07:51:20+00:00",
+    "bin_id": "101",
+    "type": "Household",
+    "area": "25.2048,55.2708",
+    "status": "Collected",
+    "prev_fill": 39,
+    "source": "request"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 15,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 4,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "103",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 1,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 14,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 1,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 5,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 15,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 5,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 11,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 6,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 8,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "113",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 7,
+    "type": "Household"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 6,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "115",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 14,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 2,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 1,
+    "type": "Household"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 4,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 5,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 8,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:37+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 14,
+    "type": "Household"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 15,
+    "new_fill": 19,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 4,
+    "new_fill": 16,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 14,
+    "new_fill": 29,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 1,
+    "new_fill": 11,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 5,
+    "new_fill": 14,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 15,
+    "new_fill": 20,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 5,
+    "new_fill": 19,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "109",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 0,
+    "new_fill": 11,
+    "type": "Household"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 11,
+    "new_fill": 17,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 6,
+    "new_fill": 8,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 8,
+    "new_fill": 18,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 6,
+    "new_fill": 10,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 2,
+    "new_fill": 9,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 4,
+    "new_fill": 18,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 5,
+    "new_fill": 15,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 8,
+    "new_fill": 23,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:38+00:00",
+    "status": "IoT Update",
+    "prev_fill": 14,
+    "new_fill": 21,
+    "type": "Household"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 19,
+    "new_fill": 29,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 16,
+    "new_fill": 30,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "103",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 1,
+    "new_fill": 11,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 29,
+    "new_fill": 37,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 11,
+    "new_fill": 20,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 14,
+    "new_fill": 20,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 20,
+    "new_fill": 29,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 19,
+    "new_fill": 29,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "109",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 11,
+    "new_fill": 13,
+    "type": "Household"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 17,
+    "new_fill": 20,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 8,
+    "new_fill": 18,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 18,
+    "new_fill": 30,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "113",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 7,
+    "new_fill": 17,
+    "type": "Household"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 10,
+    "new_fill": 23,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "115",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 14,
+    "new_fill": 28,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 9,
+    "new_fill": 14,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 1,
+    "new_fill": 12,
+    "type": "Household"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 18,
+    "new_fill": 27,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 15,
+    "new_fill": 21,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 23,
+    "new_fill": 31,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 21,
+    "new_fill": 27,
+    "type": "Household"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 29,
+    "new_fill": 30,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 30,
+    "new_fill": 41,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 37,
+    "new_fill": 42,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 20,
+    "new_fill": 28,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 20,
+    "new_fill": 21,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 29,
+    "new_fill": 44,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 29,
+    "new_fill": 37,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "109",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 13,
+    "new_fill": 23,
+    "type": "Household"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 20,
+    "new_fill": 29,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 18,
+    "new_fill": 19,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "113",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 17,
+    "new_fill": 31,
+    "type": "Household"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 23,
+    "new_fill": 33,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "115",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 28,
+    "new_fill": 33,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 14,
+    "new_fill": 16,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 12,
+    "new_fill": 18,
+    "type": "Household"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 27,
+    "new_fill": 41,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 21,
+    "new_fill": 23,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 31,
+    "new_fill": 46,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:42+00:00",
+    "status": "IoT Update",
+    "prev_fill": 27,
+    "new_fill": 30,
+    "type": "Household"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 30,
+    "new_fill": 38,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 41,
+    "new_fill": 46,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "103",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 11,
+    "new_fill": 24,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 42,
+    "new_fill": 48,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 28,
+    "new_fill": 38,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 21,
+    "new_fill": 36,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 44,
+    "new_fill": 51,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 37,
+    "new_fill": 39,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "109",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 23,
+    "new_fill": 24,
+    "type": "Household"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 29,
+    "new_fill": 37,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 19,
+    "new_fill": 27,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 30,
+    "new_fill": 44,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "113",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 31,
+    "new_fill": 37,
+    "type": "Household"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 33,
+    "new_fill": 34,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 16,
+    "new_fill": 17,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 18,
+    "new_fill": 27,
+    "type": "Household"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 23,
+    "new_fill": 24,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 46,
+    "new_fill": 61,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 46,
+    "new_fill": 54,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "103",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 24,
+    "new_fill": 38,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 48,
+    "new_fill": 50,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 38,
+    "new_fill": 43,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 36,
+    "new_fill": 44,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 51,
+    "new_fill": 65,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 39,
+    "new_fill": 51,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 37,
+    "new_fill": 43,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 27,
+    "new_fill": 33,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 44,
+    "new_fill": 57,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "113",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 37,
+    "new_fill": 38,
+    "type": "Household"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 34,
+    "new_fill": 40,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "115",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 33,
+    "new_fill": 42,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 27,
+    "new_fill": 34,
+    "type": "Household"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 41,
+    "new_fill": 45,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 24,
+    "new_fill": 30,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 61,
+    "new_fill": 74,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:43+00:00",
+    "status": "IoT Update",
+    "prev_fill": 30,
+    "new_fill": 36,
+    "type": "Household"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 38,
+    "new_fill": 45,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 54,
+    "new_fill": 56,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "103",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 38,
+    "new_fill": 48,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 50,
+    "new_fill": 61,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 43,
+    "new_fill": 51,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 44,
+    "new_fill": 55,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 65,
+    "new_fill": 66,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 51,
+    "new_fill": 61,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "109",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 24,
+    "new_fill": 36,
+    "type": "Household"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 43,
+    "new_fill": 54,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 33,
+    "new_fill": 36,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 57,
+    "new_fill": 65,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "113",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 38,
+    "new_fill": 45,
+    "type": "Household"
+  },
+  {
+    "bin_id": "115",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 42,
+    "new_fill": 56,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 17,
+    "new_fill": 30,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 34,
+    "new_fill": 43,
+    "type": "Household"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 45,
+    "new_fill": 53,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 30,
+    "new_fill": 45,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 74,
+    "new_fill": 83,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 36,
+    "new_fill": 51,
+    "type": "Household"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 45,
+    "new_fill": 56,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 56,
+    "new_fill": 61,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "103",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 48,
+    "new_fill": 55,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 61,
+    "new_fill": 62,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 51,
+    "new_fill": 53,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 55,
+    "new_fill": 59,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 66,
+    "new_fill": 76,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 61,
+    "new_fill": 76,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 54,
+    "new_fill": 61,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 36,
+    "new_fill": 40,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 65,
+    "new_fill": 71,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 40,
+    "new_fill": 51,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "115",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 56,
+    "new_fill": 66,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 30,
+    "new_fill": 39,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 43,
+    "new_fill": 50,
+    "type": "Household"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 53,
+    "new_fill": 59,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 45,
+    "new_fill": 59,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 83,
+    "new_fill": 91,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:44+00:00",
+    "status": "IoT Update",
+    "prev_fill": 51,
+    "new_fill": 56,
+    "type": "Household"
+  },
+  {
+    "bin_id": "102",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 61,
+    "new_fill": 63,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "103",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 55,
+    "new_fill": 70,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "104",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 62,
+    "new_fill": 77,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 53,
+    "new_fill": 68,
+    "type": "Household"
+  },
+  {
+    "bin_id": "106",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 59,
+    "new_fill": 65,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "107",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 76,
+    "new_fill": 82,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 76,
+    "new_fill": 78,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "109",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 36,
+    "new_fill": 37,
+    "type": "Household"
+  },
+  {
+    "bin_id": "110",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 61,
+    "new_fill": 73,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "111",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 40,
+    "new_fill": 42,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "112",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 71,
+    "new_fill": 81,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "113",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 45,
+    "new_fill": 60,
+    "type": "Household"
+  },
+  {
+    "bin_id": "114",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 51,
+    "new_fill": 54,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "115",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 66,
+    "new_fill": 79,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "116",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 39,
+    "new_fill": 54,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "117",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 50,
+    "new_fill": 58,
+    "type": "Household"
+  },
+  {
+    "bin_id": "118",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 59,
+    "new_fill": 60,
+    "type": "Recyclable"
+  },
+  {
+    "bin_id": "119",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 59,
+    "new_fill": 66,
+    "type": "Organic"
+  },
+  {
+    "bin_id": "120",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 91,
+    "new_fill": 92,
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "121",
+    "timestamp": "2025-12-03T07:51:45+00:00",
+    "status": "IoT Update",
+    "prev_fill": 56,
+    "new_fill": 65,
+    "type": "Household"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:22+00:00",
+    "bin_id": "104",
+    "type": "Household",
+    "area": "25.1155,55.2542",
+    "status": "Collected",
+    "prev_fill": 84,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:39+00:00",
+    "bin_id": "116",
+    "type": "Recyclable",
+    "area": "25.1596,55.3148",
+    "status": "Collected",
+    "prev_fill": 100,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:41+00:00",
+    "bin_id": "115",
+    "type": "Household",
+    "area": "25.1789,55.3232",
+    "status": "Collected",
+    "prev_fill": 99,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:44+00:00",
+    "bin_id": "117",
+    "type": "Household",
+    "area": "25.1005,55.3144",
+    "status": "Collected",
+    "prev_fill": 98,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:47+00:00",
+    "bin_id": "114",
+    "type": "Industrial",
+    "area": "25.1741,55.3252",
+    "status": "Collected",
+    "prev_fill": 93,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:49+00:00",
+    "bin_id": "119",
+    "type": "Organic",
+    "area": "25.1684,55.2873",
+    "status": "Collected",
+    "prev_fill": 89,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:52+00:00",
+    "bin_id": "120",
+    "type": "Recyclable",
+    "area": "25.1048,55.2712",
+    "status": "Collected",
+    "prev_fill": 89,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:54+00:00",
+    "bin_id": "109",
+    "type": "Household",
+    "area": "25.1319,55.3336",
+    "status": "Collected",
+    "prev_fill": 88,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:05:57+00:00",
+    "bin_id": "112",
+    "type": "Industrial",
+    "area": "25.1768,55.2709",
+    "status": "Collected",
+    "prev_fill": 86,
+    "source": "request"
+  },
+  {
+    "timestamp": "2025-12-03T08:06:00+00:00",
+    "bin_id": "113",
+    "type": "Recyclable",
+    "area": "25.1623,55.2973",
+    "status": "Collected",
+    "prev_fill": 86,
+    "source": "request"
   }
 ]

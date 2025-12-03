@@ -29,7 +29,7 @@ for f in facilities:
 # seed sample bins if empty (keeps previous logic)
 if not bins:
     for i in range(1, 21):
-        b_id = f"B{100 + i}"
+        b_id = f"{100 + i}"
         b_type = random.choice(["Household", "Industrial", "Recyclable", "Organic"])
         b_lat = 25.2048 + random.uniform(-0.04, 0.04)
         b_lon = 55.2708 + random.uniform(-0.04, 0.04)

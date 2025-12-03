@@ -22,15 +22,15 @@ def render_bin_registry(bins, open_add_bin_dialog, open_update_fill_dialog, disp
     avg_fill = sum(b.fill_level for b in bins) / total_bins if total_bins else 0
     
     with ui.row().classes("w-full gap-4 mb-6"):
-        with ui.card().classes("flex-1 p-4 shadow-sm bg-blue-50 border-l-4 border-blue-500"):
-            ui.label("Total Bins").classes("text-sm text-gray-600 mb-1")
-            ui.label(str(total_bins)).classes("text-3xl font-bold text-blue-600")
-        with ui.card().classes("flex-1 p-4 shadow-sm bg-red-50 border-l-4 border-red-500"):
-            ui.label("Urgent (≥80%)").classes("text-sm text-gray-600 mb-1")
+        with ui.card().classes("flex-1 p-4"):
+            ui.label("Total Bins").classes("text-sm text-gray-600")
+            ui.label(str(total_bins)).classes("text-3xl font-bold")
+        with ui.card().classes("flex-1 p-4"):
+            ui.label("Urgent (≥80%)").classes("text-sm text-gray-600")
             ui.label(str(urgent_bins)).classes("text-3xl font-bold text-red-600")
-        with ui.card().classes("flex-1 p-4 shadow-sm bg-orange-50 border-l-4 border-orange-500"):
-            ui.label("Avg Fill Level").classes("text-sm text-gray-600 mb-1")
-            ui.label(f"{avg_fill:.1f}%").classes("text-3xl font-bold text-orange-600")
+        with ui.card().classes("flex-1 p-4"):
+            ui.label("Avg Fill Level").classes("text-sm text-gray-600")
+            ui.label(f"{avg_fill:.1f}%").classes("text-3xl font-bold")
 
     # Search & filter card
     with ui.card().classes("w-full p-6 shadow-lg rounded-lg bg-white"):

@@ -248,6 +248,11 @@ async def collect_all_bins_action():
 # Add a new bin to the system
 def add_bin_action(id, btype, lat, lon, fill):
     try:
+        # Check for duplicate ID
+        if state.bins_map.get(str(id)):
+            show_popup(f"Bin ID {id} already exists", type="warning")
+            return
+
         new_bin = models.Bin(id=str(id), waste_type=btype, lat=float(lat), lon=float(lon), fill_level=int(fill))
         state.bins.append(new_bin)
         state.bins_map.set(str(id), new_bin)
