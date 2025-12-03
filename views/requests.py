@@ -1,6 +1,5 @@
 """Collection requests view for GreenBin application."""
 from nicegui import ui
-import pandas as pd
 import state
 from .tables import REQUESTS_COLUMNS, REQUESTS_STATUS_SLOT, REQUESTS_ACTIONS_SLOT
 
@@ -66,11 +65,11 @@ def render_requests(process_request_action, process_specific_request_fn, reject_
             table_container.clear()
             with table_container:
                 if state.requests:
-                    df_requests = pd.DataFrame([r.to_dict() for r in state.requests])
+                    rows = [r.to_dict() for r in state.requests]
                     
                     table = ui.table(
                         columns=REQUESTS_COLUMNS,
-                        rows=df_requests.to_dict('records'),
+                        rows=rows,
                         pagination=10
                     ).classes("w-full").props('flat bordered dense separator="cell"')
                     

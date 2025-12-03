@@ -8851,5 +8851,26 @@
     "status": "Collected",
     "prev_fill": 86,
     "source": "request"
+  },
+  {
+    "bin_id": "101",
+    "timestamp": "2025-12-03T08:26:41+00:00",
+    "status": "Request Processed",
+    "action": "Created",
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "108",
+    "timestamp": "2025-12-03T08:27:04+00:00",
+    "status": "Request Processed",
+    "action": "Created",
+    "type": "Industrial"
+  },
+  {
+    "bin_id": "105",
+    "timestamp": "2025-12-03T08:29:42+00:00",
+    "status": "Request Processed",
+    "action": "Created",
+    "type": "Organic"
   }
 ]
